@@ -1,5 +1,5 @@
-# Default NAMESPACE created by R
-# Remove the previous line if you edit this file
+# Default NAMESPACE created by R - Yes, I edited it
+# Remove the previous line if you edit this file (ignoring this for now)
 
 # Export all names
 exportPattern(".")
@@ -21,7 +21,7 @@ importFrom("MASS", "ginv")
 importFrom("methods", "as", "is")
 importFrom("parallel", "detectCores", "makeCluster", "parApply", "parSapply", "parLapply", "stopCluster", "mclapply")
 importFrom("qtl", "read.cross")
-importFrom("regress", "regress", "BLUP", "summary.regress", "print.regress")
+importFrom("regress", "regress", "BLUP")
 importFrom("stats", "as.formula", "coef", "cor", "dist", "lm", "model.matrix", "na.omit", "na.pass", "nls", "quantile", "rnorm", "runif", "sd", "smooth", "step", "terms", "weighted.mean")
 importFrom("utils", "capture.output", "read.table", "sessionInfo", "str", "write.table")
 
@@ -47,5 +47,7 @@ S3method("summary", gpMod)
 S3method("summary", gpModList)
 S3method("summary", pedigree)
 S3method("summary", relationshipMatrix)
+S3method("summary", regress)
+S3method("print", summary.regress)
 
 

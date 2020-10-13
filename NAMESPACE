@@ -21,7 +21,7 @@ importFrom("MASS", "ginv")
 importFrom("methods", "as", "is")
 importFrom("parallel", "detectCores", "makeCluster", "parApply", "parSapply", "parLapply", "stopCluster", "mclapply")
 importFrom("qtl", "read.cross")
-importFrom("regress", "regress", "BLUP", summary.regress, print.regress)
+importFrom("regress", "regress", "BLUP", "summary.regress", "print.regress")
 importFrom("stats", "as.formula", "coef", "cor", "dist", "lm", "model.matrix", "na.omit", "na.pass", "nls", "quantile", "rnorm", "runif", "sd", "smooth", "step", "terms", "weighted.mean")
 importFrom("utils", "capture.output", "read.table", "sessionInfo", "str", "write.table")
 

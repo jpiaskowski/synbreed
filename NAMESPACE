@@ -48,6 +48,6 @@ S3method("summary", gpModList)
 S3method("summary", pedigree)
 S3method("summary", relationshipMatrix)
 S3method("summary", regress)
-S3method("print", summary.regress)
+S3method("print", regress)
 
 

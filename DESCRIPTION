@@ -6,7 +6,7 @@ Date: 2018-03-08
 Author: Hans-Juergen Auinger, Valentin Wimmer, Theresa Albrecht, Chris-Carolin Schoen with contributions by Larry Schaeffer, Malena Erbe, Ulrike Ober, Christian Reimer, Yvonne Badke and Peter VandeHaar
 Depends: R (>= 2.14)
 Imports: abind, BGLR, doBy, doParallel, foreach, igraph, lattice, qtl,
-        regress (>= 1.3-21), MASS, methods, LDheatmap
+        regress, MASS, methods, LDheatmap
 Suggests: synbreedData (>= 1.5)
 Maintainer: Hans-Juergen Auinger <auinger@tum.de>
 Description: A collection of functions required for genomic prediction which were developed within the Synbreed project for synergistic plant and animal breeding (<http://www.synbreed.tum.de>). This covers data processing, data visualization, and analysis. All functions are embedded within the framework of a single, unified data object. The implementation is flexible with respect to a wide range of data formats in plant and animal breeding. This research was funded by the German Federal Ministry of Education and Research (BMBF) within the AgroClustEr Synbreed - Synergistic plant and animal breeding (FKZ 0315528A).

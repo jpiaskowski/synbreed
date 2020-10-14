@@ -10,7 +10,7 @@
 #' @param object object of class ''pedigree''
 #' @param ...  not used
 #' @author Valentin Wimmer
-#' @keywords methods
+#' @method pedigree summary 
 #' @examples
 #' 
 #' # plant pedigree
@@ -21,7 +21,7 @@
 #' ped <- simul.pedigree(gener=4,7,animals=TRUE)
 #' summary(ped)
 #' 
-#' @export summary.pedigree
+#' @export 
 summary.pedigree <- function(object,...){
 
      if(any(class(object)=="gpData")) ped <- object$pedigree

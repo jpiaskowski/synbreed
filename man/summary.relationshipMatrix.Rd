@@ -5,7 +5,7 @@
 \alias{print.summary.relationshipMatrix}
 \title{Summary of relationship matrices}
 \usage{
-\method{summary}{relationshipMatrix}(object, ...)
+\method{relationshipMatrix}{summary}(object, ...)
 }
 \arguments{
 \item{object}{object of class ''relationshipMatrix''}
@@ -28,4 +28,3 @@ summary(U)
 \author{
 Valentin Wimmer
 }
-\keyword{methods}

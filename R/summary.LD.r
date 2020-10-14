@@ -1,7 +1,3 @@
-# summary for LD objects
-
-
-
 #' Summary for LD objects
 #' 
 #' \code{Summary} method for class ''LDdf'' and ''LDmat''
@@ -19,7 +15,7 @@
 #' @param ...  not used
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @seealso \code{\link{pairwiseLD}}, ~~~
-#' @keywords methods
+#' @method LDdf summary
 #' @examples
 #' 
 #'   \dontrun{
@@ -32,7 +28,7 @@
 #'   summary(maizeLDm)
 #'   }
 #' 
-#' @export summary.LDdf
+#' @export 
 #' @importFrom doParallel registerDoParallel
 #' @importFrom parallel detectCores makeCluster parLapply stopCluster mclapply
 #' 

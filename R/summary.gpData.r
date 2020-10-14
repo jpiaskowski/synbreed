@@ -10,7 +10,7 @@
 #' @param object object of class \code{gpData}
 #' @param ...  not used
 #' @author Valentin Wimmer
-#' @keywords methods
+#' @method gpData summary 
 #' @examples
 #' 
 #' \dontrun{
@@ -19,7 +19,7 @@
 #' summary(maize)
 #' }
 #' 
-#' @export summary.gpData
+#' @export 
 #' @importFrom methods as
 #' 
 summary.gpData <- function(object,...){

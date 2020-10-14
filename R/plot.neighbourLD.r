@@ -41,7 +41,7 @@
 #' @importFrom grDevices dev.off pdf png 
 #' @importFrom methods is
 #' @importFrom stats smooth
-#' @importFrom graphics axis box image layout legend par plot points text  
+#' @importFrom graphics axis box image layout legend par plot points text polygon 
 #' 
 plotNeighbourLD <- function(LD,gpData,dense=FALSE,nMarker=TRUE,centr=NULL,file=NULL,fileFormat="pdf",...){
     oldPar <- par()

@@ -5,7 +5,7 @@
 \alias{summary.LDmat}
 \title{Summary for LD objects}
 \usage{
-\method{summary}{LDdf}(object, cores = 1, ...)
+\method{LDdf}{summary}(object, cores = 1, ...)
 }
 \arguments{
 \item{object}{object of class \code{LDdf} or \code{LDmat} which is the
@@ -44,4 +44,3 @@ average and maximum distance of number of markers
 \author{
 Valentin Wimmer and Hans-Juergen Auinger
 }
-\keyword{methods}

@@ -1,8 +1,3 @@
-# conversion to class 'cross'
-# return F2 intercross
-
-
-
 #' Conversion between objects of class 'cross' and 'gpData'
 #' 
 #' Function to convert an object of class \code{gpData} to an object of class
@@ -23,7 +18,6 @@
 #' @aliases gpData2cross cross2gpData
 #' @param gpData object of class \code{gpData} with non-empty elements for
 #' \code{pheno}, \code{geno} and \code{map}
-#' @param cross object of class \code{cross}
 #' @param ...  further arguments for function \code{codeGeno}. Only used in
 #' \code{gpData2cross}.
 #' @return Object of class \code{cross} of \code{gpData} for function

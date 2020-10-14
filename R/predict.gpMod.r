@@ -1,7 +1,3 @@
-# predictions for objects of class gpMod
-
-
-
 #' Prediction for genomic prediction models.
 #' 
 #' S3 \code{predict} method for objects of class \code{gpMod}. A genomic
@@ -18,6 +14,8 @@
 #' predict the unphenotyped individuals of the prediction set by solving the
 #' corresponding mixed model equations using the variance components of the fit
 #' in \code{gpMod}.
+#' 
+#' @aliases predict.gpMod 
 #' 
 #' @param object object of class \code{gpMod} which is the model used for the
 #' prediction. If the model includes a \code{relationshipMatrix}, this must
@@ -39,6 +37,7 @@
 #' 
 #' Henderson CR (1984). Applications of linear models in animal breeding.
 #' University of Guelph.
+#' @method gpMod predict 
 #' @examples
 #' 
 #' # Example from Henderson (1977)
@@ -76,7 +75,7 @@
 #' predict(modU,rownames(maizeC$pheno)[1201:1250])
 #' }
 #' 
-#' @export predict.gpMod
+#' @export 
 #' @importFrom MASS ginv
 #' 
 predict.gpMod <- function(object,newdata=NULL,...){

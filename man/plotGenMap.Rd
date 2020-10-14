@@ -40,9 +40,6 @@ positions of maize in Mbp are used (according to maizeGDB, version 2).}
 supported: pdf and png. Default is \code{"pdf"}.}
 
 \item{\dots}{further graphical arguments for function \code{plot}}
-
-\item{x}{object of class \code{GenMap}, i. e. the \code{map} object in a
-\code{gpData}-object}
 }
 \value{
 Plot of the marker positions within each chromosome. One chromosome

@@ -13,8 +13,6 @@ gpData2cross(gpData, ...)
 
 \item{...}{further arguments for function \code{codeGeno}. Only used in
 \code{gpData2cross}.}
-
-\item{cross}{object of class \code{cross}}
 }
 \value{
 Object of class \code{cross} of \code{gpData} for function

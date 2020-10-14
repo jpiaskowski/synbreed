@@ -5,7 +5,7 @@
 \alias{print.summary.gpData}
 \title{Summary for class gpData}
 \usage{
-\method{summary}{gpData}(object, ...)
+\method{gpData}{summary}(object, ...)
 }
 \arguments{
 \item{object}{object of class \code{gpData}}
@@ -27,4 +27,3 @@ summary(maize)
 \author{
 Valentin Wimmer
 }
-\keyword{methods}

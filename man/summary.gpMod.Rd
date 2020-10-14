@@ -7,7 +7,7 @@
 \alias{print.summary.gpModList}
 \title{Summary for class gpMod}
 \usage{
-\method{summary}{gpMod}(object, ...)
+\method{gpMod}{summary}(object, ...)
 }
 \arguments{
 \item{object}{object of class \code{gpMod}}

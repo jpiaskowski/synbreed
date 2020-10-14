@@ -11,6 +11,8 @@
 #' ordered by this effect in the horizontal direction and a labeled axis is
 #' plotted at the bottom.
 #' 
+#' @aliases plot.pedigree
+#' 
 #' @param x object of class \code{pedigree} or object of class \code{gpData}
 #' with element \code{pedigree}
 #' @param effect vector of length \code{nrow(pedigree)} with effects to plot on
@@ -23,6 +25,7 @@
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @seealso \code{\link{create.pedigree}}, \code{\link{simul.pedigree}}
 #' @keywords hplot
+#' @method pedigree plot 
 #' @examples
 #' 
 #' id <- paste("ID", 1:9, sep="0")
@@ -42,7 +45,7 @@
 #' ped <- add.pedigree(ped1, ped2)
 #' plot(ped)
 #' 
-#' @export plot.pedigree
+#' @export
 #' @importFrom igraph graph.data.frame
 #' @importFrom methods is
 #' @importFrom graphics axis plot 

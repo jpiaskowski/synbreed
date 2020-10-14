@@ -3,6 +3,7 @@
 #' Visualization for objects of class \code{relationshipMatrix} using a heatmap
 #' of pairwise relatedness coefficients.
 #' 
+#' @aliases plot.relationshipMatrix 
 #' 
 #' @param x Object of class \code{relationshipMatrix}
 #' @param y Optional for comparisons of objects of class
@@ -23,6 +24,7 @@
 #' \code{at=seq(from,to,length=9)}.
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @keywords hplot
+#' @method relationshipMatrix plot 
 #' @examples
 #' 
 #' # small pedigree
@@ -42,7 +44,7 @@
 #' plot(U,levelbreaks=seq(0,2,length=9))
 #' }
 #' 
-#' @export plot.relationshipMatrix
+#' @export
 #' @importFrom lattice levelplot
 #' @importFrom methods is
 #' @importFrom stats quantile 

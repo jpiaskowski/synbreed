@@ -7,7 +7,7 @@
 #' @param object object of class ''relationshipMatrix''
 #' @param ...  not used
 #' @author Valentin Wimmer
-#' @keywords methods
+#' @method relationshipMatrix summary
 #' @examples
 #' 
 #' \dontrun{
@@ -17,7 +17,7 @@
 #' summary(U)
 #' }
 #' 
-#' @export summary.relationshipMatrix
+#' @export 
 summary.relationshipMatrix <- function(object,...){
      relMat <- object
      offdiag <- relMat[lower.tri(relMat,diag=FALSE)]

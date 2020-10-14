@@ -4,7 +4,7 @@
 \alias{predict.gpMod}
 \title{Prediction for genomic prediction models.}
 \usage{
-\method{predict}{gpMod}(object, newdata = NULL, ...)
+\method{gpMod}{predict}(object, newdata = NULL, ...)
 }
 \arguments{
 \item{object}{object of class \code{gpMod} which is the model used for the

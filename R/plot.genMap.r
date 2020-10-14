@@ -15,8 +15,6 @@ plot.GenMap <- function (x, dense = FALSE, nMarker = TRUE, bw=1, centr=NULL, fil
 #' number of markers exceeds 200 per chromosome on average.
 #' 
 #' @aliases plotGenMap plot.GenMap
-#' @param x object of class \code{GenMap}, i. e. the \code{map} object in a
-#' \code{gpData}-object
 #' @param map object of class \code{gpData} with object \code{map} or a
 #' \code{data.frame} with columns 'chr' (specifying the chromosome of the
 #' marker) and 'pos' (position of the marker within chromosome measured with
@@ -54,7 +52,7 @@ plot.GenMap <- function (x, dense = FALSE, nMarker = TRUE, bw=1, centr=NULL, fil
 #' @export plotGenMap
 #' @importFrom grDevices dev.off pdf png 
 #' @importFrom methods is
-#' @importFrom graphics axis image layout legend lines par plot points text 
+#' @importFrom graphics axis image layout legend lines par plot points text polygon 
 #' 
 plotGenMap <- function (map, dense = FALSE, nMarker = TRUE, bw=1, centr=NULL, file = NULL, fileFormat = "pdf", ...){
     oldPar <- par()

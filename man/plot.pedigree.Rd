@@ -4,7 +4,7 @@
 \alias{plot.pedigree}
 \title{Visualization of pedigree}
 \usage{
-\method{plot}{pedigree}(x, effect = NULL, ...)
+\method{pedigree}{plot}(x, effect = NULL, ...)
 }
 \arguments{
 \item{x}{object of class \code{pedigree} or object of class \code{gpData}

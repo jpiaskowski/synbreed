@@ -1,3 +1,36 @@
+#' Prepare data for PLINK
+#' 
+#' Create input files and corresponding script for PLINK (Purcell et al. 2007)
+#' to estimate pairwise LD through function \code{pairwiseLD}.
+#' 
+#' 
+#' @param gp \code{gpData} object with elements \code{geno} and \code{map}
+#' @param wdir \code{character}. Directory for PLINK input files
+#' @param prefix \code{character}. Prefix for PLINK input files.
+#' @param ld.threshold \code{numeric}. Threshold for the LD used in PLINK.
+#' @param type \code{character}. Specifies the type of return value for PLINK.
+#' @param ld.window \code{numeric}. Window size for pairwise differences which
+#' will be reported by PLINK (only for \code{use.plink=TRUE}; argument
+#' \code{--ld-window-kb} in PLINK) to thin the output dimensions. Only SNP
+#' pairs with a distance < \code{ld.window} are reported (default = 99999).
+#' @return No value returned. Files \code{prefix.map}, \code{prefix.ped} and
+#' \code{prefixPlinkScript.txt} are created in the working directory
+#' @author Valentin Wimmer
+#' @seealso \code{\link{pairwiseLD}}
+#' @references Purcell S, Neale B, Todd-Brown K, Thomas L, Ferreira MAR, Bender
+#' D, Maller J, Sklar P, de Bakker PIW, Daly MJ & Sham PC (2007) PLINK: a
+#' toolset for whole-genome association and population-based linkage analysis.
+#' American Journal of Human Genetics, 81.
+#' @keywords manip
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' write.plink(maize,type="data.frame")}
+#' 
+#' @export write.plink
+#' @importFrom utils write.table 
+#' 
 write.plink <- function(gp,wdir=getwd(),prefix=paste(substitute(gp)),ld.threshold=0,type=c("data.frame","matrix"),ld.window=99999){
 
        # information from arguments

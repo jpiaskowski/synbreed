@@ -1,4 +1,27 @@
 # summary method fo class 'gpData'
+
+
+#' Summary for class gpData
+#' 
+#' S3 \code{summary} method for objects of class \code{gpData}
+#' 
+#' 
+#' @aliases summary.gpData print.summary.gpData
+#' @param object object of class \code{gpData}
+#' @param ...  not used
+#' @author Valentin Wimmer
+#' @keywords methods
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' data(maize)
+#' summary(maize)
+#' }
+#' 
+#' @export summary.gpData
+#' @importFrom methods as
+#' 
 summary.gpData <- function(object,...){
     obj <- object
     ans <- list()

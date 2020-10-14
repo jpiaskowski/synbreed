@@ -1,5 +1,41 @@
 # summary for LD objects
 
+
+
+#' Summary for LD objects
+#' 
+#' \code{Summary} method for class ''LDdf'' and ''LDmat''
+#' 
+#' Returns for each chromosome: Number of markers; mean, minimum and maximum LD
+#' measured as \eqn{r^2}{r2}; fraction of markers with \eqn{r^2>0.2}{r2>0.2};
+#' average and maximum distance of number of markers
+#' 
+#' @aliases summary.LDdf summary.LDmat
+#' @param object object of class \code{LDdf} or \code{LDmat} which is the
+#' output of function \code{pairwiseLD} and argument \code{type="data.frame"}
+#' or \code{type="matrix"}
+#' @param cores \code{numeric}. Specifies the number of cores for parallel
+#' computing.
+#' @param ...  not used
+#' @author Valentin Wimmer and Hans-Juergen Auinger
+#' @seealso \code{\link{pairwiseLD}}, ~~~
+#' @keywords methods
+#' @examples
+#' 
+#'   \dontrun{
+#'   library(synbreed)
+#'   data(maize)
+#'   maizeC <- codeGeno(maize)
+#'   maizeLD <- pairwiseLD(maizeC,chr=1:10,type="data.frame")
+#'   maizeLDm <- pairwiseLD(maizeC,chr=1:10,type="matrix")
+#'   summary(maizeLD)
+#'   summary(maizeLDm)
+#'   }
+#' 
+#' @export summary.LDdf
+#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel detectCores makeCluster parLapply stopCluster mclapply
+#' 
 summary.LDdf <- function(object,cores=1,...){
   multiLapply <- function(x,y,...,cores=cores){
     if(.Platform$OS.type == "windows" & cores>1){

@@ -1,3 +1,48 @@
+#' Plot neighbour linkage disequilibrium
+#' 
+#' A function to visualize Linkage Disequilibrium estimates between adjacent
+#' markers.
+#' 
+#' The plot is similar to \code{plotGenMap} with the option \code{dense=TRUE},
+#' but here the LD between adjacent markers is plotted along the chromosomes.
+#' 
+#' @param LD object of class \code{LDmat}, i.e the output of function
+#' \code{pairwiseLD} using argument \code{type="matrix"}.
+#' @param gpData object of class \code{gpData} with object \code{map} or a
+#' \code{data.frame} with columns 'chr' (specifying the chromosome of the
+#' marker) and 'pos' (position of the marker within chromosome measured with
+#' genetic or physical distances)
+#' @param dense \code{logical}. Should density visualization for high-density
+#' genetic maps be used?
+#' @param nMarker \code{logical}. Print number of markers for each chromosome?
+#' @param centr \code{numeric} vector. Positions for the centromeres in the
+#' same order as chromosomes in \code{map}. If \code{"maize"}, centromere
+#' positions of maize in Mbp are used.
+#' @param file Optionally a path to a file where the plot is saved to
+#' @param fileFormat \code{character}. At the moment two file formats are
+#' supported: pdf and png. Default is \code{"pdf"}.
+#' @param \dots further graphical arguments for function \code{plot}
+#' @return Plot of neighbour LD along each chromosome. One chromosome is
+#' displayed from the first to the last marker.
+#' @author Theresa Albrecht and Hans-Juergen Auinger
+#' @seealso \code{\link{plotGenMap}}, \code{\link{pairwiseLD}}
+#' @keywords hplot
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' data(maize)
+#' maize2 <-codeGeno(maize)
+#' LD <- pairwiseLD(maize2,chr=1:10,type="matrix")
+#' plotNeighbourLD(LD,maize2,nMarker=FALSE)
+#' }
+#' 
+#' @export plotNeighbourLD
+#' @importFrom grDevices dev.off pdf png 
+#' @importFrom methods is
+#' @importFrom stats smooth
+#' @importFrom graphics axis box image layout legend par plot points text  
+#' 
 plotNeighbourLD <- function(LD,gpData,dense=FALSE,nMarker=TRUE,centr=NULL,file=NULL,fileFormat="pdf",...){
     oldPar <- par()
     if (class(gpData) == "gpData"){

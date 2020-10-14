@@ -1,4 +1,19 @@
 # summary method for cross validation results
+
+
+#' Summary of options and results of the cross validation procedure
+#' 
+#' \code{summary} method for class "cvData"
+#' 
+#' 
+#' @aliases summary.cvData print.summary.cvData
+#' @param object object of class "cvData"
+#' @param ... not used
+#' @author Theresa Albrecht
+#' @seealso \code{\link{crossVal}}
+#' @keywords methods
+#' @export summary.cvData
+#' @importFrom stats sd
 summary.cvData <- function(object,...){
 
      obj <- object

@@ -1,4 +1,26 @@
 # summary method for pedigree
+
+
+#' Summary of pedigree information
+#' 
+#' \code{Summary} method for class ''pedigree''
+#' 
+#' 
+#' @aliases summary.pedigree print.summary.pedigree
+#' @param object object of class ''pedigree''
+#' @param ...  not used
+#' @author Valentin Wimmer
+#' @examples
+#' 
+#' # plant pedigree
+#' ped <- simul.pedigree(gener=4,7)
+#' summary(ped)
+#' 
+#' # animal pedigree
+#' ped <- simul.pedigree(gener=4,7,animals=TRUE)
+#' summary(ped)
+#' 
+#' @export 
 summary.pedigree <- function(object,...){
 
      if(any(class(object)=="gpData")) ped <- object$pedigree

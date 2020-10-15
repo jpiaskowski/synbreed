@@ -1,5 +1,36 @@
-# summary for maker maps
-
+#' Summary of marker map information
+#' 
+#' This function can be used to summarize information from a marker map in an
+#' object of class \code{gpData}.  Return value is a \code{data.frame} with one
+#' row for each chromosome and one row summarizing all chromosomes.
+#' 
+#' Summary statistics of differences are based on euclidian distances between
+#' markers with non-missing position in \code{map}, i.e. \code{pos!=NA}.
+#' 
+#' @param map \code{data.frame} with columns \code{chr} and \code{pos} or a
+#' \code{gpData} object with element \code{map}
+#' @param cores \code{numeric}. Specifies the number of cores for parallel
+#' computing.
+#' @return A \code{data.frame} with one row for each chromosome and the
+#' intersection of all chromosomes and columns \item{noM}{number of markers}
+#' \item{range}{range of positions, i.e. difference between first and last
+#' marker} \item{avDist}{avarage distance of markers} \item{maxDist}{maximum
+#' distance of markers} \item{minDist}{minimum distance of markers}
+#' @author Valentin Wimmer
+#' @seealso \code{\link{create.gpData}}
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' data(maize)
+#' summaryGenMap(maize)
+#' }
+#' 
+#' @export summaryGenMap
+#' @importFrom doParallel registerDoParallel
+#' @importFrom parallel detectCores makeCluster parLapply stopCluster mclapply
+#' @importFrom stats weighted.mean 
+#' 
 summaryGenMap <- function(map, cores=1){
   multiLapply <- function(x,y,...,cores=cores){
     if(.Platform$OS.type == "windows" & cores>1){

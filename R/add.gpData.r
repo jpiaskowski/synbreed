@@ -1,3 +1,4 @@
+
 #library(synbreedData)
 #data(maize)
 #gpData1 <- maize
@@ -10,6 +11,29 @@
 #gpData2$pheno <- abind(gpData2$pheno, gpData2$pheno, along =2)
 #dimnames(gpData2$pheno)[[2]] <- c("IDTrait", "Trait2")
 
+
+#' Join two \code{gpData} objects
+#' 
+#' Function for joining two \code{gpData} objects
+#' 
+#' The function writes a vcf file. The format of the output is "GT". Other
+#' formats are not supported.
+#' 
+#' @param gpData1 A \code{gpData} object with at least elements \code{geno} and
+#' \code{map}
+#' @param gpData2 Second \code{gpData} object with at least elements
+#' \code{geno} and \code{map}
+#' @return A \code{gpData} object is returned containing \code{gpData1}
+#' and \code{gpData2}
+#' @author Hans-Juergen Auinger
+#' @seealso \code{\link{create.gpData}} \code{\link{codeGeno}}
+#' @examples
+#' 
+#' \dontrun{add.gpData(maize, maize)}
+#' 
+#' @export add.gpData
+#' @importFrom abind abind
+#' 
 add.gpData <- function(gpData1, gpData2){
   if(!is.null(gpData1$info$version)) stop(paste("Recode ", substitute(gpData1), "! You have used an old version to create/code ", substitute(gpData1), sep=""))
   if(substr(gpData1$info$version, 47, 50)<0.12) stop(paste("Recode ", substitute(gpData1), "! You have used an old version to create/code ", substitute(gpData1), sep=""))

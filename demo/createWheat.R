@@ -1,6 +1,6 @@
 #############################################
 ## Create a genomic prediction Data object
-## from the wheat data in the BLR package
+## from the wheat data in the BGLR package
 ##
 ##
 ## author : Valentin Wimmer

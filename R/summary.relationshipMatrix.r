@@ -1,3 +1,22 @@
+#' Summary of relationship matrices
+#' 
+#' \code{Summary} method for class ''relationshipMatrix''
+#' 
+#' 
+#' @aliases summary.relationshipMatrix print.summary.relationshipMatrix
+#' @param object object of class ''relationshipMatrix'
+#' @param ... not used
+#' @author Valentin Wimmer
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' data(maize)
+#' U <- kin(codeGeno(maize),ret="realized")
+#' summary(U)
+#' }
+#' 
+#' @export 
 summary.relationshipMatrix <- function(object,...){
      relMat <- object
      offdiag <- relMat[lower.tri(relMat,diag=FALSE)]

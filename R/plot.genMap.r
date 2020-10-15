@@ -1,6 +1,59 @@
 plot.GenMap <- function (x, dense = FALSE, nMarker = TRUE, bw=1, centr=NULL, file = NULL, fileFormat = "pdf", ...){
     plotGenMap(map=x, dense=dense, nMarker=nMarker, bw=bw, centr=centr, file=file, fileFormat=fileFormat, ...)
 }
+
+
+#' Plot marker map
+#' 
+#' A function to visualize low and high-density marker maps.
+#' 
+#' In the low density plot, the unique positions of markers are plotted as
+#' horizontal lines. In the high-density plot, the distribution of the markers
+#' is visualized as a heatmap of density estimation together with a color key.
+#' In this case, the number of markers within an interval of equal bandwidth
+#' \code{bw} is counted. The high density plot is typically useful if the
+#' number of markers exceeds 200 per chromosome on average.
+#' 
+#' @aliases plotGenMap plot.GenMap
+#' @param map object of class \code{gpData} with object \code{map} or a
+#' \code{data.frame} with columns 'chr' (specifying the chromosome of the
+#' marker) and 'pos' (position of the marker within chromosome measured with
+#' genetic or physical distances)
+#' @param dense \code{logical}. Should density visualization for high-density
+#' genetic maps be used?
+#' @param nMarker \code{logical}. Print number of markers for each chromosome?
+#' @param bw \code{numeric}. Bandwidth to use for \code{dense=TRUE} to control
+#' the resolution (default = 1 [map unit]).
+#' @param centr \code{numeric} vector. Positions for the centromeres in the
+#' same order as chromosomes in \code{map}. If \code{"maize"}, centromere
+#' positions of maize in Mbp are used (according to maizeGDB, version 2).
+#' @param file Optionally a path to a file where the plot is saved to
+#' @param fileFormat \code{character}. At the moment two file formats are
+#' supported: pdf and png. Default is \code{"pdf"}.
+#' @param \dots further graphical arguments for function \code{plot}
+#' @return Plot of the marker positions within each chromosome. One chromosome
+#' is displayed from the first to the last marker.
+#' @author Valentin Wimmer and Hans-Juergen Auinger
+#' @seealso \code{\link{create.gpData}}
+#' @keywords hplot
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreedData)
+#' # low density plot
+#' data(maize)
+#' plotGenMap(maize)
+#' 
+#' # high density plot
+#' data(mice)
+#' plotGenMap(mice,dense=TRUE,nMarker=FALSE)
+#' }
+#' 
+#' @export plotGenMap
+#' @importFrom grDevices dev.off pdf png 
+#' @importFrom methods is
+#' @importFrom graphics axis image layout legend lines par plot points text polygon 
+#' 
 plotGenMap <- function (map, dense = FALSE, nMarker = TRUE, bw=1, centr=NULL, file = NULL, fileFormat = "pdf", ...){
     oldPar <- par()
 

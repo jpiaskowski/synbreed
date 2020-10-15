@@ -4,7 +4,7 @@
 \alias{plot.LDdf}
 \title{Plot function for class \code{LDdf}}
 \usage{
-\method{LDdf}{plot}(
+\method{plot}{LDdf}(
   x,
   gpData,
   plotType = "dist",

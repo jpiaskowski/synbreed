@@ -82,6 +82,7 @@
 #' @param \dots further arguments to be used by the genomic prediction models,
 #' i.e. prior values and MCMC options for the \code{BLR} function (see
 #' \code{\link[BGLR]{BLR}}) or parameters for the REML algorithm in regress.
+#' 
 #' @return Object of class \code{gpMod} which is a list of \item{fit}{The model
 #' fit returned by the genomic prediction method} \item{model}{The model type,
 #' see 'Arguments'} \item{y}{The phenotypic records for the individuals in the

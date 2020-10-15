@@ -10,7 +10,7 @@
 #' @param object object of class \code{gpData}
 #' @param ...  not used
 #' @author Valentin Wimmer
-#' @method gpData summary 
+
 #' @examples
 #' 
 #' \dontrun{

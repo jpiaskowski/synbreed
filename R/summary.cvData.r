@@ -11,7 +11,7 @@
 #' @param ... not used
 #' @author Theresa Albrecht
 #' @seealso \code{\link{crossVal}}
-#' @method cvData summary
+
 #' @export
 #' @importFrom stats sd
 summary.cvData <- function(object,...){

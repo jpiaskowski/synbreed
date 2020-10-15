@@ -25,7 +25,6 @@
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @seealso \code{\link{create.pedigree}}, \code{\link{simul.pedigree}}
 #' @keywords hplot
-#' @method pedigree plot 
 #' @examples
 #' 
 #' id <- paste("ID", 1:9, sep="0")
@@ -44,6 +43,7 @@
 #' 
 #' ped <- add.pedigree(ped1, ped2)
 #' plot(ped)
+#' 
 #' 
 #' @export
 #' @importFrom igraph graph.data.frame

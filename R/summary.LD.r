@@ -12,10 +12,10 @@
 #' or \code{type="matrix"}
 #' @param cores \code{numeric}. Specifies the number of cores for parallel
 #' computing.
-#' @param ...  not used
+#' @param ... not used
+#' 
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @seealso \code{\link{pairwiseLD}}, ~~~
-#' @method LDdf summary
 #' @examples
 #' 
 #'   \dontrun{

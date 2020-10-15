@@ -48,10 +48,11 @@
 #' @param colD The color for the dots in the plot of \code{type="nls"} and
 #' \code{type="p"}
 #' @param \dots further graphical arguments for function \code{plot}
+#' 
 #' @author Hans-Juergen Auinger
 #' @seealso \code{\link{plotNeighbourLD}}, \code{\link{LDDist}},
 #' \code{\link{plotGenMap}}, \code{\link{pairwiseLD}}
-#' @method LDdf plot
+#' 
 #' @export 
 #' @importFrom stats dist
 #' 

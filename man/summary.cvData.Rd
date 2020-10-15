@@ -5,7 +5,7 @@
 \alias{print.summary.cvData}
 \title{Summary of options and results of the cross validation procedure}
 \usage{
-\method{cvData}{summary}(object, ...)
+\method{summary}{cvData}(object, ...)
 }
 \arguments{
 \item{object}{object of class "cvData"}

@@ -5,7 +5,7 @@
 \alias{summary.LDmat}
 \title{Summary for LD objects}
 \usage{
-\method{LDdf}{summary}(object, cores = 1, ...)
+\method{summary}{LDdf}(object, cores = 1, ...)
 }
 \arguments{
 \item{object}{object of class \code{LDdf} or \code{LDmat} which is the

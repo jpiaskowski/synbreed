@@ -37,7 +37,7 @@
 #' @author Hans-Juergen Auinger
 #' @seealso \code{\link{plotNeighbourLD}}, \code{\link{LDDist}},
 #' \code{\link{plotGenMap}}, \code{\link{pairwiseLD}}
-#' @method LDmat plot 
+#'
 #' @export 
 #' @importFrom stats dist
 #' 

@@ -4,7 +4,7 @@
 \alias{plot.relationshipMatrix}
 \title{Heatmap for relationship Matrix}
 \usage{
-\method{relationshipMatrix}{plot}(
+\method{plot}{relationshipMatrix}(
   x,
   y = NULL,
   levelbreaks = NULL,

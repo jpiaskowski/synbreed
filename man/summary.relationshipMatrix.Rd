@@ -5,10 +5,10 @@
 \alias{print.summary.relationshipMatrix}
 \title{Summary of relationship matrices}
 \usage{
-\method{relationshipMatrix}{summary}(object, ...)
+\method{summary}{relationshipMatrix}(object, ...)
 }
 \arguments{
-\item{object}{object of class ''relationshipMatrix''}
+\item{object}{object of class ''relationshipMatrix'}
 
 \item{...}{not used}
 }

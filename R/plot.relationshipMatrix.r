@@ -24,7 +24,6 @@
 #' \code{at=seq(from,to,length=9)}.
 #' @author Valentin Wimmer and Hans-Juergen Auinger
 #' @keywords hplot
-#' @method relationshipMatrix plot 
 #' @examples
 #' 
 #' # small pedigree
@@ -44,6 +43,7 @@
 #' plot(U,levelbreaks=seq(0,2,length=9))
 #' }
 #' 
+#' @rdname 
 #' @export
 #' @importFrom lattice levelplot
 #' @importFrom methods is

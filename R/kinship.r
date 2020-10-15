@@ -374,7 +374,7 @@ kin <- function(gpData,ret=c("add","kin","dom","gam","realized","realizedAB","sm
           attr(kmat, "SNPs") <- colnames(gpData$geno)
 }
 
-    if (ret == "gaussian"){ # euklidian distance with gaussian
+    if (ret == "gaussian"){ # Euclidian distance with Gaussian
       if(any(class(gpData)=="gpData")){
         if(!gpData$info$codeGeno) stop("use function 'codeGeno' before using 'kin'")
           marker <- gpData$geno

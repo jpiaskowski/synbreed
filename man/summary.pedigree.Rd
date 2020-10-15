@@ -5,7 +5,7 @@
 \alias{print.summary.pedigree}
 \title{Summary of pedigree information}
 \usage{
-\method{pedigree}{summary}(object, ...)
+\method{summary}{pedigree}(object, ...)
 }
 \arguments{
 \item{object}{object of class ''pedigree''}

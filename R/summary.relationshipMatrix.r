@@ -4,10 +4,9 @@
 #' 
 #' 
 #' @aliases summary.relationshipMatrix print.summary.relationshipMatrix
-#' @param object object of class ''relationshipMatrix''
-#' @param ...  not used
+#' @param object object of class ''relationshipMatrix'
+#' @param ... not used
 #' @author Valentin Wimmer
-#' @method relationshipMatrix summary
 #' @examples
 #' 
 #' \dontrun{

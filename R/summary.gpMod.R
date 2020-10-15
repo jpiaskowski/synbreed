@@ -5,9 +5,8 @@
 #' 
 #' @aliases summary.gpMod  summary.gpModList  print.summary.gpMod print.summary.gpModList
 #' @param object object of class \code{gpMod}
-#' @param \dots not used
 #' @seealso \code{\link{gpMod}}
-#' @method gpMod summary
+#' @rdname gpMod
 #' @examples
 #' 
 #' \dontrun{

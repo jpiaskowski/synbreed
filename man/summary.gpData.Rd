@@ -5,7 +5,7 @@
 \alias{print.summary.gpData}
 \title{Summary for class gpData}
 \usage{
-\method{gpData}{summary}(object, ...)
+\method{summary}{gpData}(object, ...)
 }
 \arguments{
 \item{object}{object of class \code{gpData}}

@@ -4,7 +4,7 @@
 \alias{plot.LDmat}
 \title{Plot function for class \code{LDmat}}
 \usage{
-\method{LDmat}{plot}(
+\method{plot}{LDmat}(
   x,
   gpData,
   plotType = "map",

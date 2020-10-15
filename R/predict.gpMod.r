@@ -27,7 +27,8 @@
 #' \code{model="BLUP"} a \code{character} vector with the names of the
 #' individuals to predict. If \code{newdata=NULL}, the genetic performances of
 #' the individuals for the training set are returned.
-#' @param ... not used
+#' @param \dots not used
+#' 
 #' @return a named vector with the predicted genetic values for all individuals
 #' in \code{newdata}.
 #' @author Valentin Wimmer
@@ -37,7 +38,6 @@
 #' 
 #' Henderson CR (1984). Applications of linear models in animal breeding.
 #' University of Guelph.
-#' @method gpMod predict 
 #' @examples
 #' 
 #' # Example from Henderson (1977)

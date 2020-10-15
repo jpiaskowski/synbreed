@@ -10,7 +10,6 @@
 #' @param object object of class ''pedigree''
 #' @param ...  not used
 #' @author Valentin Wimmer
-#' @method pedigree summary 
 #' @examples
 #' 
 #' # plant pedigree

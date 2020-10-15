@@ -4,7 +4,7 @@
 \alias{predict.gpMod}
 \title{Prediction for genomic prediction models.}
 \usage{
-\method{gpMod}{predict}(object, newdata = NULL, ...)
+\method{predict}{gpMod}(object, newdata = NULL, ...)
 }
 \arguments{
 \item{object}{object of class \code{gpMod} which is the model used for the
@@ -19,7 +19,7 @@ example below).}
 individuals to predict. If \code{newdata=NULL}, the genetic performances of
 the individuals for the training set are returned.}
 
-\item{...}{not used}
+\item{\dots}{not used}
 }
 \value{
 a named vector with the predicted genetic values for all individuals

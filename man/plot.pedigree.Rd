@@ -4,7 +4,7 @@
 \alias{plot.pedigree}
 \title{Visualization of pedigree}
 \usage{
-\method{pedigree}{plot}(x, effect = NULL, ...)
+\method{plot}{pedigree}(x, effect = NULL, ...)
 }
 \arguments{
 \item{x}{object of class \code{pedigree} or object of class \code{gpData}
@@ -54,6 +54,7 @@ ped2
 
 ped <- add.pedigree(ped1, ped2)
 plot(ped)
+
 
 }
 \seealso{

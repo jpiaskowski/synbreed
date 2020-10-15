@@ -43,7 +43,6 @@
 #' plot(U,levelbreaks=seq(0,2,length=9))
 #' }
 #' 
-#' @rdname 
 #' @export
 #' @importFrom lattice levelplot
 #' @importFrom methods is

@@ -1,15 +1,34 @@
 
-#' synbreed package: 
-#' 
-#' 
-#' 
-#' Main Functions:
-#' 
-#' 
+#' synbreed package: A Framework for the Analysis of Genomic
+#' Prediction Data Using R
+#'
+#' The data flow in synbreed is guided by a single, unified data object of class
+#' \code{gpData} (‘genomic prediction Data’) which is used for storage of multiple data
+#' sources. This includes an array for the phenotypes (individual × trait ×
+#' replication) and a matrix for the marker genotypes (individual × marker
+#' scores). If required, this structure can be extended to include pedigree
+#' information and a marker map. All analysis functions are based on this data
+#' structure. A key feature of the synbreed package is the generality of the
+#' class \code{gpData} which is suitable for a wide range of statistical methods using
+#' genotypic and phenotypic data. Moreover, it is very convenient to store and
+#' share objects of class gpData. Any object of class gpData can be converted to
+#' class \code{cross} in the R package 'qtl' (Broman et al., 2003) and vice versa or to a
+#' \code{data.frame).
+#'
+#' Main Functionality:
+#'
+#' - Data Preparation
+#' - Visualisation
+#' - `create.gpData`
+#' - `gp.Mod`
+#' - Genetic Modelling
+#' - and more
+#'
 #' @name synbreed-package
 #' @docType package
 #' @keywords package
-#' @examples 
+#'
+#' @examples
 #' [better put something here]
 #' 
 NULL 
@@ -26,7 +45,7 @@ NULL
 #' 
 #' There are two quantitative phenotypes in this data set. The heritabilities of these
 #' traits, 0.41 and 0.66, were estimated with a pedigree-based animal model using
-#' the data set on hand.
+#' the data on hand.
 #' 
 #' Genotypic data consists of 7250 biallelic SNP markers for every phenotyped
 #' individual with missing data included. SNPs are mapped across all 29

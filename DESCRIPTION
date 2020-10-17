@@ -13,7 +13,7 @@ Description: A collection of functions required for genomic prediction which wer
 URL: http://synbreed.r-forge.r-project.org/
 License: GPL-3
 LazyLoad: yes
-LazyData: no
+LazyData: yes
 ZipData: no
 Repository: CRAN
 Repository/R-Forge/Project: synbreed

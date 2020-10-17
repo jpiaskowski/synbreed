@@ -1,8 +1,8 @@
 #' Mixed Model Equations
-#' 
+#'
 #' Set up Mixed Model Equations for given design matrices, i.e. variance
 #' components for random effects must be known.
-#' 
+#'
 #' The linear mixed model is given by \deqn{\bf y = \bf X \bf b + \bf Z \bf u +
 #' \bf e }{y = Xb + Zu +e} with \eqn{\bf u \sim N(0,\bf G)}{u = N(0,G)} and
 #' \eqn{\bf e \sim N(0,\bf R)}{e = N(0,R)}. Solutions for fixed effects \eqn{b}
@@ -21,7 +21,7 @@
 #' not estimated by this function but have to be specified by the user, i.e.
 #' \eqn{G^{-1}}{GI} must be multiplied with shrinkage factor
 #' \eqn{\frac{\sigma^2_e}{\sigma^2_g}}{sigma2e/sigma2g}.
-#' 
+#'
 #' @param X Design matrix for fixed effects
 #' @param Z Design matrix for random effects
 #' @param GI Inverse of (estimated) variance-covariance matrix of random
@@ -41,58 +41,57 @@
 #' @references Henderson, C. R. 1984. Applications of Linear Models in Animal
 #' Breeding. Univ. of Guelph, Guelph, ON, Canada.
 #' @examples
-#' 
+#'
 #' \dontrun{
 #' library(synbreedData)
 #' data(maize)
-#' 
+#'
 #' # realized kinship matrix
 #' maizeC <- codeGeno(maize)
-#' U <- kin(maizeC,ret="realized")/2
-#' 
+#' U <- kin(maizeC, ret = "realized") / 2
+#'
 #' # solution with gpMod
-#' m <- gpMod(maizeC,kin=U,model="BLUP")
-#' 
+#' m <- gpMod(maizeC, kin = U, model = "BLUP")
+#'
 #' # solution with MME
-#' diag(U) <- diag(U) + 0.000001  # to avoid singularities
+#' diag(U) <- diag(U) + 0.000001 # to avoid singularities
 #' # determine shrinkage parameter
-#' lambda <- m$fit$sigma[2]/ m$fit$sigma[1]
+#' lambda <- m$fit$sigma[2] / m$fit$sigma[1]
 #' # multiply G with shrinkage parameter
-#' GI <- solve(U)*lambda
-#' y <- maizeC$pheno[,1,]
+#' GI <- solve(U) * lambda
+#' y <- maizeC$pheno[, 1, ]
 #' n <- length(y)
-#' X <- matrix(1,ncol=1,nrow=n)
-#' mme <- MME(y=y,Z=diag(n),GI=GI,X=X,RI=diag(n))
-#' 
+#' X <- matrix(1, ncol = 1, nrow = n)
+#' mme <- MME(y = y, Z = diag(n), GI = GI, X = X, RI = diag(n))
+#'
 #' # comparison
-#' head(m$fit$predicted[,1]-m$fit$beta)
+#' head(m$fit$predicted[, 1] - m$fit$beta)
 #' head(mme$u)
 #' }
-#' 
+#'
 #' @export MME
 #' @importFrom MASS ginv
-#' 
-MME <- function(X,Z,GI,RI,y){
+#'
+MME <- function(X, Z, GI, RI, y) {
   SST <- t(y) %*% RI %*% y
   XX <- t(X) %*% RI %*% X
   XZ <- t(X) %*% RI %*% Z
   ZZ <- t(Z) %*% RI %*% Z
   Xy <- t(X) %*% RI %*% y
   Zy <- t(Z) %*% RI %*% y
-  R1 <- cbind(XX,XZ)
-  R2 <- cbind(t(XZ),(ZZ+GI))
-  LHS <- rbind(R1,R2)
-  RHS <- rbind(Xy,Zy)
+  R1 <- cbind(XX, XZ)
+  R2 <- cbind(t(XZ), (ZZ + GI))
+  LHS <- rbind(R1, R2)
+  RHS <- rbind(Xy, Zy)
   C <- ginv(LHS)
   bhat <- C %*% RHS
   SSR <- t(bhat) %*% RHS
   SSE <- SST - SSR
   N <- nrow(X)
-  rX <- sum(diag(X%*%ginv(X)))
-  sigma2e <- SSE/(N-rX)
-  SEP <- sqrt(diag(C)*sigma2e)
+  rX <- sum(diag(X %*% ginv(X)))
+  sigma2e <- SSE / (N - rX)
+  SEP <- sqrt(diag(C) * sigma2e)
   b <- bhat[1:ncol(X)]
   u <- bhat[-c(1:ncol(X))]
-  return(list(b=b,u=u,LHS=LHS,RHS=RHS,C=C,SEP=SEP,SST=SST,SSR=SSR,residuals=y-X%*%b-Z%*%u))
-  }
-  
+  return(list(b = b, u = u, LHS = LHS, RHS = RHS, C = C, SEP = SEP, SST = SST, SSR = SSR, residuals = y - X %*% b - Z %*% u))
+}

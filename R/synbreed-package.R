@@ -1,45 +1,150 @@
 
+#' synbreed package: 
+#' 
+#' 
+#' 
+#' Main Functions:
+#' 
+#' 
+#' @name synbreed-package
+#' @docType package
+#' @keywords package
+#' @examples 
+#' [better put something here]
+#' 
+NULL 
 
-#' Extract or replace part of map data.frame
+
+#' Dairy cattle data
 #' 
-#' Extract or replace part of an object of class \code{GenMap}.
+#' Data set contains genotypic, phenotypic, map and pedigree data of 500 bulls.
+#' All individuals are labeled with an unique ID, starting with ID1430 and
+#' ending with ID1929. Genotypic and pedigree data are from a real cattle
+#' data set while phenotypes were simulated.  Pedigree information is
+#' available for parents and grandparents of the phenotyped
+#' individuals.
+#' 
+#' There are two quantitative phenotypes in this data set. The heritabilities of these
+#' traits, 0.41 and 0.66, were estimated with a pedigree-based animal model using
+#' the data set on hand.
+#' 
+#' Genotypic data consists of 7250 biallelic SNP markers for every phenotyped
+#' individual with missing data included. SNPs are mapped across all 29
+#' autosomes. Distances in the SNP map are given in megabases (Mb).
 #' 
 #' 
-#' @name [.GenMap
+#' @name cattle
 #' @docType data
-#' @param x object of class ''GenMap''
-#' @param ...  indices
+#' @format object of class \code{gpData}
+#' @keywords datasets
 #' @examples
 #' 
 #' \dontrun{
-#' data(maize)
-#' head(maize$map)
+#' library(synbreed)
+#' data(cattle)
+#' summary(cattle)
 #' }
 #' 
 NULL
 
 
 
-
-
-#' Extract or replace part of relationship matrix
+#' Simulated maize data
 #' 
-#' Extract or replace part of an object of class \code{relationshipMatrix}.
+#' This is a simulated dataset of a maize breeding program. Data comprise 1250
+#' doubled haploid lines that were genotyped with 1117 polymorphic SNP
+#' markers and phenotyped in a testcross with a single tester for one
+#' quantitative trait. All individuals are labeled with a unique ID, starting
+#' from 11360 to 12609. Markers are distributed along all 10 chromosomes of
+#' maize. Pedigree information starts with base population and is available up
+#' to 15 generations. The 1250 lines belong to 25 full sib families with 50
+#' individuals in each family. In the simulation of true breeding values (TBV),
+#' 1000 biallelic quantitative trait loci (QTL) with equal and additive (no
+#' dominance or epistasis) effects were generated. True breeding values for
+#' individuals were calculated according to \deqn{tbv=\sum_{k=1}^{1000}
+#' QTL_k}{TBV=\sum QTL(k)} where \eqn{QTL_k}{QTL(k)} is the effect of the
+#' \eqn{k}-th QTL. Phenotypic values were simulated according to
+#' \deqn{y_i=tbv_i + \epsilon_i}{trait=tbv+e} where \eqn{\epsilon_i \sim
+#' N(0,\sigma^2)}{e = N(0,sigma2)}. The value for \eqn{\sigma^2}{sigma2} was
+#' chosen in a way that a given plot heritability of \eqn{h^2=0.197}{h2=0.197}
+#' is realized. Note that true breeding values for 1250 phenotyped lines are
+#' stored as \code{tbv} in \code{covar} of \code{gpData} object. Reported
+#' phenotypic values of lines are adjusted values testcross means for yield
+#' [dt/ha] evaluated in 3 locations.
 #' 
 #' 
-#' @name [.relationshipMatrix
+#' @name maize
 #' @docType data
-#' @param x object of class ''relationshipMatrix''
-#' @param ...  indices
+#' @format object of class \code{gpData}
+#' @keywords datasets
 #' @examples
 #' 
 #' \dontrun{
+#' library(synbreed)
 #' data(maize)
-#' U <- kin(codeGeno(maize),ret="realized")
-#' U[1:3,1:3]
+#' summary(maize)                                       
 #' }
 #' 
 NULL
 
 
+
+#' Heterogenous stock mice population
+#' 
+#' Data set comprises public available data of 2527 (1293 males and 1234
+#' females) heterogenous stock mice derived from eight inbred strains (A/J,
+#' AKR/J, BALBc/J, CBA/J, C3H/HeJ, C57BL/6J, DBA/2J and LP/J) followed by 50
+#' generations of pseudorandom mating. All individuals are labeled with a
+#' unique ID, starting with \code{A048005080}. For all individuals, family, sex
+#' (females=0, males=1), month of birth (1-12), birth year, coat color, cage
+#' density and litter is available and stored in \code{covar}.
+#' 
+#' The measured traits are described in Solberg et al. (2006). Here, the body
+#' weight at age of 6 weeks [g] and growth slope between 6 and 10 weeks age
+#' [g/day] are available. The heritabilities of these traits are reported as
+#' 0.74 and 0.30, respectively (Valdar et al, 2006b). Phenotypic data was taken
+#' from \url{http://mus.well.ox.ac.uk/GSCAN/HS_PHENOTYPES/Weight.txt}.
+#' 
+#' Genotypic data consists of 12545 biallelic SNP markers and is available for
+#' 1940 individuals. Raw genotypic data from
+#' \url{http://mus.well.ox.ac.uk/GSCAN/HS_GENOTYPES/} is given in the
+#' \code{Ped-File Format} with two columns for each marker. Both alleles were
+#' combined to a single genotype for each marker in \code{mice} data. The SNPs
+#' are mapped in a sex-averaged genetic map with distances given in centimorgan
+#' (Shifman et al. (2006)). SNPs are mapped across all 19 autosomes and
+#' X-chromosome where distances between adjacent markers vary form 0 to 3 cM.
+#' 
+#' 
+#' @name mice
+#' @docType data
+#' @format object of class \code{gpData}
+#' @references 
+#' 
+#' Shifman S, Bell JT, Copley RR, Taylor MS, Williams RW, et al.
+#' (2006) A High-Resolution Single Nucleotide Polymorphism Genetic Map of the
+#' Mouse Genome. PLoS Biol 4(12)
+#' 
+#' Solberg L.C. et al. (2006), A protocol for high-throughput phenotyping,
+#' suitable for quantitative trait analysis in mice. Mamm. Genome 17, 129-146
+#' 
+#' Valdar W, Solberg LC, Gauguier D, Burnett S, Klenerman P, Cookson WO, Taylor
+#' MS, Rawlins JN, Mott R, Flint J. (2006a) Genome-wide genetic association of
+#' complex traits in heterogeneous stock mice. Nat Genet. 8, 879-887.
+#' 
+#' Valdar W, Solberg LC, Gauguier D, Cookson WO, Rawlins NJ, Mott R, Flint
+#' J.(2006b) Genetic and environmental effects on complex traits in mice.
+#' Genetics 175, 959-984
+#' 
+#' @source Welcome Trust Centre for Human Genetics, Oxford University, data
+#' available from \url{http://gscan.well.ox.ac.uk}
+#' @keywords datasets
+#' @examples
+#' 
+#' \dontrun{
+#' library(synbreed)
+#' data(mice)
+#' summary(mice)
+#' }
+#' 
+NULL
 

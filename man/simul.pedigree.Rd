@@ -36,12 +36,11 @@ dam. Each ID is progeny of one sire and one dam.
 \examples{
 
 # example for plants
-ped <- simul.pedigree(gener=4,ids=c(3,5,8,8))
+ped <- simul.pedigree(gener = 4, ids = c(3, 5, 8, 8))
 plot(ped)
-#example for animals
-peda <- simul.pedigree(gener=4,ids=c(3,5,8,8),animals=TRUE)
+# example for animals
+peda <- simul.pedigree(gener = 4, ids = c(3, 5, 8, 8), animals = TRUE)
 plot(peda)
-
 }
 \seealso{
 \code{\link{simul.phenotype}}, \code{\link{create.pedigree}},

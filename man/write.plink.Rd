@@ -41,7 +41,8 @@ to estimate pairwise LD through function \code{pairwiseLD}.
 
 \dontrun{
 library(synbreedData)
-write.plink(maize,type="data.frame")}
+write.plink(maize, type = "data.frame")
+}
 
 }
 \references{

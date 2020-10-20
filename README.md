@@ -9,12 +9,20 @@
 * json metadata added
 * code reformatted with 'styler'
 
+
+**In Progress:**
+
+* write unit tests
+* update 'synbreed-package.r'
+  - need to make this consistent with vignettes
+* convert vignettes to Rmarkdown format
+  - need all functions working to write these
+  - break up vignette into smaller pieces
+
+
 **To do:**
 
-* finish update 'synbreed-package.r'
-* finish converting vignettes to Rmarkdown format
 * get updated version of Beagle added
-* write unit tests
 * make README file consistent with ropensci guidelines
 * set up CI
 * look into getting this back onto CRAN 

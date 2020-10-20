@@ -66,7 +66,7 @@ plotGenMap(maize)
 
 # high density plot
 data(mice)
-plotGenMap(mice,dense=TRUE,nMarker=FALSE)
+plotGenMap(mice, dense = TRUE, nMarker = FALSE)
 }
 
 }

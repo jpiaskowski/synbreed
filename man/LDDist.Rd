@@ -73,16 +73,18 @@ data(maize)
 maizeC <- codeGeno(maize)
 
 # LD for chr 1
-maizeLD <- pairwiseLD(maizeC,chr=1,type="data.frame")
+maizeLD <- pairwiseLD(maizeC, chr = 1, type = "data.frame")
 # scatterplot
-LDDist(maizeLD,type="p",pch=19,colD=hsv(alpha=0.1,v=0))
+LDDist(maizeLD, type = "p", pch = 19, colD = hsv(alpha = 0.1, v = 0))
 
 # stacked bars  with default categories
-LDDist(maizeLD,type="bars")
+LDDist(maizeLD, type = "bars")
 
 # stacked bars  with user-defined categories
-LDDist(maizeLD,type="bars",breaks=list(dist=c(0,10,20,40,60,180),
-r2=c(1,0.6,0.4,0.3,0.1,0)))
+LDDist(maizeLD, type = "bars", breaks = list(
+  dist = c(0, 10, 20, 40, 60, 180),
+  r2 = c(1, 0.6, 0.4, 0.3, 0.1, 0)
+))
 }
 
 }

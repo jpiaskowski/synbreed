@@ -20,7 +20,7 @@
 \dontrun{
 library(synbreedData)
 data(maize)
-U <- kin(codeGeno(maize),ret="realized")
+U <- kin(codeGeno(maize), ret = "realized")
 summary(U)
 }
 

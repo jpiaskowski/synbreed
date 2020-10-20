@@ -46,20 +46,19 @@ treaded as unknown, too.
 \examples{
 
 # example with 9 individuals
-id <- paste("ID", 1:9, sep="0")
-par1 <- paste("ID", c(0,0,0,0,1,1,1,4,7), sep="")
-par2 <- paste("ID", c("","","","",2,3,2,5,8), sep="")
-gener <- c(0,0,0,0,1,1,1,2,3)
+id <- paste("ID", 1:9, sep = "0")
+par1 <- paste("ID", c(0, 0, 0, 0, 1, 1, 1, 4, 7), sep = "")
+par2 <- paste("ID", c("", "", "", "", 2, 3, 2, 5, 8), sep = "")
+gener <- c(0, 0, 0, 0, 1, 1, 1, 2, 3)
 
 # create pedigree object (using argument gener)
-ped <- create.pedigree(id,par1,par2,gener,unknown=c("ID0", "ID"))
+ped <- create.pedigree(id, par1, par2, gener, unknown = c("ID0", "ID"))
 ped
 plot(ped)
 
 # create pedigree object (without using argument gener)
-ped2 <- create.pedigree(id,par1,par2,unknown=c("ID0", "ID"))
+ped2 <- create.pedigree(id, par1, par2, unknown = c("ID0", "ID"))
 ped2
-
 }
 \seealso{
 \code{\link{plot.pedigree}, \link{add.pedigree}}

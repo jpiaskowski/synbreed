@@ -53,8 +53,8 @@ data(maize)
 maizeC <- codeGeno(maize)
 
 # LD for chr 1
-maizeLD <- pairwiseLD(maizeC,chr=1,type="matrix")
-LDMap(maizeLD,maizeC)
+maizeLD <- pairwiseLD(maizeC, chr = 1, type = "matrix")
+LDMap(maizeLD, maizeC)
 }
 
 }

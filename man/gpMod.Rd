@@ -127,25 +127,26 @@ data(maize)
 maizeC <- codeGeno(maize)
 
 # pedigree-based (expected) kinship matrix
-K <- kin(maizeC,ret="kin",DH=maize$covar$DH)
+K <- kin(maizeC, ret = "kin", DH = maize$covar$DH)
 
 # marker-based (realized) relationship matrix
 # divide by an additional factor 2
 # because for testcross prediction the kinship of DH lines is used
-U <- kin(maizeC,ret="realized")/2
+U <- kin(maizeC, ret = "realized") / 2
 # BLUP models
 # P-BLUP
-mod1 <- gpMod(maizeC,model="BLUP",kin=K)
+mod1 <- gpMod(maizeC, model = "BLUP", kin = K)
 # G-BLUP
-mod2 <- gpMod(maizeC,model="BLUP",kin=U)
+mod2 <- gpMod(maizeC, model = "BLUP", kin = U)
 
 # Bayesian Lasso
-prior <- list(varE=list(df=3,S=35),lambda = list(shape=0.52,rate=1e-4,value=20,type='random'))
-mod3 <- gpMod(maizeC,model="BL",prior=prior,nIter=6000,burnIn=1000,thin=5)
+prior <- list(varE = list(df = 3, S = 35), lambda = list(shape = 0.52, rate = 1e-4, value = 20, type = "random"))
+mod3 <- gpMod(maizeC, model = "BL", prior = prior, nIter = 6000, burnIn = 1000, thin = 5)
 
 summary(mod1)
 summary(mod2)
-summary(mod3)}
+summary(mod3)
+}
 
 
 \dontrun{
@@ -153,10 +154,10 @@ library(synbreedData)
 data(maize)
 maizeC <- codeGeno(maize)
 # marker-based (realized) relationship matrix
-U <- kin(maizeC,ret="realized")/2
+U <- kin(maizeC, ret = "realized") / 2
 
 # BLUP model
-mod <- gpMod(maizeC,model="BLUP",kin=U)
+mod <- gpMod(maizeC, model = "BLUP", kin = U)
 summary(mod)
 }
 

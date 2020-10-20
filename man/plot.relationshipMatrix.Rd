@@ -46,20 +46,20 @@ of pairwise relatedness coefficients.
 \examples{
 
 # small pedigree
-ped <- simul.pedigree(gener=4,7)
-gp <- create.gpData(pedigree=ped)
-A <- kin(gp,ret="add")
+ped <- simul.pedigree(gener = 4, 7)
+gp <- create.gpData(pedigree = ped)
+A <- kin(gp, ret = "add")
 plot(A)
 
 # big pedigree
 \dontrun{
 library(synbreedData)
 data(maize)
-K <- kin(maize,ret="kin")
-U <- kin(codeGeno(maize),ret="realized")/2
+K <- kin(maize, ret = "kin")
+U <- kin(codeGeno(maize), ret = "realized") / 2
 # equal colorkeys
-plot(K,levelbreaks=seq(0,2,length=9))
-plot(U,levelbreaks=seq(0,2,length=9))
+plot(K, levelbreaks = seq(0, 2, length = 9))
+plot(U, levelbreaks = seq(0, 2, length = 9))
 }
 
 }

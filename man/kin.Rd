@@ -135,38 +135,37 @@ scales theoretically between 0 and 1!
 \examples{
 
 
-#=========================
+# =========================
 # (1) pedigree based relatedness
-#=========================
+# =========================
 \dontrun{
 library(synbreedData)
 data(maize)
-K <- kin(maize,ret="kin")
+K <- kin(maize, ret = "kin")
 plot(K)
 }
 
-#=========================
+# =========================
 # (2) marker based relatedness
-#=========================
+# =========================
 \dontrun{
 data(maize)
-U <- kin(codeGeno(maize),ret="realized")
+U <- kin(codeGeno(maize), ret = "realized")
 plot(U)
 }
 
 
 ### Example for Legarra et al. (2009), J. Dairy Sci. 92: p. 4660
 id <- 1:17
-par1 <- c(0,0,0,0,0,0,0,0,1,3,5,7,9,11,4,13,13)
-par2 <- c(0,0,0,0,0,0,0,0,2,4,6,8,10,12,11,15,14)
-ped <- create.pedigree(id,par1,par2)
-gp <- create.gpData(pedigree=ped)
+par1 <- c(0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 5, 7, 9, 11, 4, 13, 13)
+par2 <- c(0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 6, 8, 10, 12, 11, 15, 14)
+ped <- create.pedigree(id, par1, par2)
+gp <- create.gpData(pedigree = ped)
 
 # additive relationship
-A <- kin(gp,ret="add")
+A <- kin(gp, ret = "add")
 # dominance relationship
-D <- kin(gp,ret="dom")
-
+D <- kin(gp, ret = "dom")
 }
 \references{
 Habier D, Fernando R, Dekkers J (2007). The Impact of Genetic Relationship

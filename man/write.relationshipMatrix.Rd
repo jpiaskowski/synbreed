@@ -43,16 +43,16 @@ generalized inverse as "*.giv".
 \examples{
 
 \dontrun{
-# example with 9 individuals        
+# example with 9 individuals
 id <- 1:9
-par1 <- c(0,0,0,0,1,1,1,4,7)
-par2 <- c(0,0,0,0,2,3,2,5,8)
-gener <- c(0,0,0,0,1,1,1,2,3)
-ped <- create.pedigree(id,par1,par2,gener)
-gp <- create.gpData(pedigree=ped)
+par1 <- c(0, 0, 0, 0, 1, 1, 1, 4, 7)
+par2 <- c(0, 0, 0, 0, 2, 3, 2, 5, 8)
+gener <- c(0, 0, 0, 0, 1, 1, 1, 2, 3)
+ped <- create.pedigree(id, par1, par2, gener)
+gp <- create.gpData(pedigree = ped)
 
-A <- kin(ped,ret="add")
-write.relationshipMatrix(A,type="ginv")
+A <- kin(ped, ret = "add")
+write.relationshipMatrix(A, type = "ginv")
 }
 
 }

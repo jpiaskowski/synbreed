@@ -18,13 +18,12 @@
 \examples{
 
 # plant pedigree
-ped <- simul.pedigree(gener=4,7)
+ped <- simul.pedigree(gener = 4, 7)
 summary(ped)
 
 # animal pedigree
-ped <- simul.pedigree(gener=4,7,animals=TRUE)
+ped <- simul.pedigree(gener = 4, 7, animals = TRUE)
 summary(ped)
-
 }
 \author{
 Valentin Wimmer

@@ -88,7 +88,7 @@ Default PLINK options used --no-parents --no-sex --no-pheno --allow-no-sex
 library(synbreedData)
 data(maize)
 maizeC <- codeGeno(maize)
-maizeLD <- pairwiseLD(maizeC,chr=1,type="data.frame")
+maizeLD <- pairwiseLD(maizeC, chr = 1, type = "data.frame")
 }
 
 }

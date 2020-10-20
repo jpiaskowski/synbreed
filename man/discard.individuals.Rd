@@ -36,32 +36,32 @@ reduced individuals. Individual information will be discarded from elements
 
 # example data
 set.seed(311)
-pheno <- data.frame(Yield = rnorm(10,200,5),Height=rnorm(10,100,1))
+pheno <- data.frame(Yield = rnorm(10, 200, 5), Height = rnorm(10, 100, 1))
 rownames(pheno) <- letters[1:10]
-geno <- matrix(sample(c("A","A/B","B",NA),size=120,replace=TRUE,
-prob=c(0.6,0.2,0.1,0.1)),nrow=10)
-rownames(geno) <-  letters[1:10]
-colnames(geno) <- paste("M",1:12,sep="")
+geno <- matrix(sample(c("A", "A/B", "B", NA),
+  size = 120, replace = TRUE,
+  prob = c(0.6, 0.2, 0.1, 0.1)
+), nrow = 10)
+rownames(geno) <- letters[1:10]
+colnames(geno) <- paste("M", 1:12, sep = "")
 # one SNP is not mapped (M5)
-map <- data.frame(chr=rep(1:3,each=4),pos=rep(1:12))
-map  <- map[-5,]
-rownames(map) <- paste("M",c(1:4,6:12),sep="")
-gp <- create.gpData(pheno=pheno,geno=geno,map=map)
+map <- data.frame(chr = rep(1:3, each = 4), pos = rep(1:12))
+map <- map[-5, ]
+rownames(map) <- paste("M", c(1:4, 6:12), sep = "")
+gp <- create.gpData(pheno = pheno, geno = geno, map = map)
 summary(gp)
 
 # discard genotypes with missing values in the marker matrix
-gp3 <- discard.individuals(gp,names(which(rowSums(is.na(gp$geno))>0)))
+gp3 <- discard.individuals(gp, names(which(rowSums(is.na(gp$geno)) > 0)))
 summary(gp3)
-
 \dontrun{
 # add one new DH line to maize data
 library(synbreedData)
 data(maize)
 
 # delete individual
-maize2 <- discard.individuals(maize,rownames(maize$geno)[1:10])
+maize2 <- discard.individuals(maize, rownames(maize$geno)[1:10])
 summary(maize2)
-
 }
 
 }

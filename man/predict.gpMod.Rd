@@ -45,38 +45,40 @@ in \code{gpMod}.
 \examples{
 
 # Example from Henderson (1977)
-dat <- data.frame(y=c(132,147,156,172),time=c(1,2,1,2),row.names=c("ID1","ID2","ID3","ID4"))
-ped <- create.pedigree(ID=c("ID6","ID5","ID1","ID2","ID3","ID4"),
-                       Par1=c(0,0,"ID5","ID5","ID1","ID6"),
-                       Par2=c(0,0,0,0,"ID6","ID2"))
-gp <- create.gpData(pheno=dat,pedigree=ped)
-A <- kin(gp,ret="add")
+dat <- data.frame(y = c(132, 147, 156, 172), time = c(1, 2, 1, 2), row.names = c("ID1", "ID2", "ID3", "ID4"))
+ped <- create.pedigree(
+  ID = c("ID6", "ID5", "ID1", "ID2", "ID3", "ID4"),
+  Par1 = c(0, 0, "ID5", "ID5", "ID1", "ID6"),
+  Par2 = c(0, 0, 0, 0, "ID6", "ID2")
+)
+gp <- create.gpData(pheno = dat, pedigree = ped)
+A <- kin(gp, ret = "add")
 
 # assuming h2=sigma2u/(sigma2u+sigma2)=0.5
 # no REML fit possible due to the limited number of observations
-y <- c(132,147,156,172)
-names(y) <- paste("ID", 1:4, sep="")
-mod1 <- list(fit=list(sigma=c(1,1),X = matrix(1,ncol=1,nrow=4)),kin=A,model="BLUP",y=y,m=NULL)
+y <- c(132, 147, 156, 172)
+names(y) <- paste("ID", 1:4, sep = "")
+mod1 <- list(fit = list(sigma = c(1, 1), X = matrix(1, ncol = 1, nrow = 4)), kin = A, model = "BLUP", y = y, m = NULL)
 # matrix A included all individuals (including those which should be predicted)
 class(mod1) <- "gpMod"
-predict(mod1,c("ID5","ID6"))
+predict(mod1, c("ID5", "ID6"))
 
 # prediction 'by hand'
-X <- matrix(1,ncol=1,nrow=4)
-Z <- diag(6)[-c(1,2),]
+X <- matrix(1, ncol = 1, nrow = 4)
+Z <- diag(6)[-c(1, 2), ]
 AI <- solve(A)
 RI <- diag(4)
 
-res <- MME(X,Z,AI,RI,y)
+res <- MME(X, Z, AI, RI, y)
 res$u[1:2]
 \dontrun{
 # prediction of genetic performance of the last 50 individuals in the maize data set
 data(maize)
 maizeC <- codeGeno(maize)
-U <- kin(maizeC,ret="realized")
-maizeC2 <- discard.individuals(maizeC,rownames(maizeC$pheno)[1201:1250])
-modU <- gpMod(maizeC2,model="BLUP",kin=U)
-predict(modU,rownames(maizeC$pheno)[1201:1250])
+U <- kin(maizeC, ret = "realized")
+maizeC2 <- discard.individuals(maizeC, rownames(maizeC$pheno)[1201:1250])
+modU <- gpMod(maizeC2, model = "BLUP", kin = U)
+predict(modU, rownames(maizeC$pheno)[1201:1250])
 }
 
 }

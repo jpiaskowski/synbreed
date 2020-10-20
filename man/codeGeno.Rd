@@ -222,27 +222,29 @@ called using \code{path.package()}.
 
 # create marker data for 9 SNPs and 10 homozygous individuals
 snp9 <- matrix(c(
-  "AA",   "AA",   "AA",   "BB",   "AA",   "AA",   "AA",   "AA",  NA,
-  "AA",   "AA",   "BB",   "BB",   "AA",   "AA",   "BB",   "AA",  NA,
-  "AA",   "AA",   "AB",   "BB",   "AB",   "AA",   "AA",   "BB",  NA,
-  "AA",   "AA",   "BB",   "BB",   "AA",   "AA",   "AA",   "AA",  NA,
-  "AA",   "AA",   "BB",   "AB",   "AA",   "BB",   "BB",   "BB",  "AB",
-  "AA",   "AA",   "BB",   "BB",   "AA",   NA,     "BB",   "AA",  NA,
-  "AB",   "AA",   "BB",   "BB",   "BB",   "AA",   "BB",   "BB",  NA,
-  "AA",   "AA",    NA,    "BB",    NA,    "AA",   "AA",   "AA",  "AA",
-  "AA",    NA,     NA,    "BB",   "BB",   "BB",   "BB",   "BB",  "AA",
-  "AA",    NA,    "AA",   "BB",   "BB",   "BB",   "AA",   "AA",  NA),
-  ncol=9,byrow=TRUE)
+  "AA", "AA", "AA", "BB", "AA", "AA", "AA", "AA", NA,
+  "AA", "AA", "BB", "BB", "AA", "AA", "BB", "AA", NA,
+  "AA", "AA", "AB", "BB", "AB", "AA", "AA", "BB", NA,
+  "AA", "AA", "BB", "BB", "AA", "AA", "AA", "AA", NA,
+  "AA", "AA", "BB", "AB", "AA", "BB", "BB", "BB", "AB",
+  "AA", "AA", "BB", "BB", "AA", NA, "BB", "AA", NA,
+  "AB", "AA", "BB", "BB", "BB", "AA", "BB", "BB", NA,
+  "AA", "AA", NA, "BB", NA, "AA", "AA", "AA", "AA",
+  "AA", NA, NA, "BB", "BB", "BB", "BB", "BB", "AA",
+  "AA", NA, "AA", "BB", "BB", "BB", "AA", "AA", NA
+),
+ncol = 9, byrow = TRUE
+)
 
 # set names for markers and individuals
-colnames(snp9) <- paste("SNP",1:9,sep="")
-rownames(snp9) <- paste("ID",1:10+100,sep="")
+colnames(snp9) <- paste("SNP", 1:9, sep = "")
+rownames(snp9) <- paste("ID", 1:10 + 100, sep = "")
 
 # create object of class 'gpData'
-gp <- create.gpData(geno=snp9)
+gp <- create.gpData(geno = snp9)
 
 # code genotypic data
-gp.coded <- codeGeno(gp,impute=TRUE,impute.type="random")
+gp.coded <- codeGeno(gp, impute = TRUE, impute.type = "random")
 
 # comparison
 gp.coded$geno
@@ -254,37 +256,37 @@ library(synbreedData)
 data(mice)
 summary(mice)
 # heterozygous values must be labeled  (may run some seconds)
-mice.coded <- codeGeno(mice,label.heter=function(x) substr(x,1,1)!=substr(x,3,3))
+mice.coded <- codeGeno(mice, label.heter = function(x) substr(x, 1, 1) != substr(x, 3, 3))
 
 
 # example with maize data and imputing by family
 data(maize)
 # first only recode alleles
-maize.coded <- codeGeno(maize,label.heter=1)
+maize.coded <- codeGeno(maize, label.heter = 1)
 
 # set 200 random chosen values to NA
 set.seed(123)
-ind1 <- sample(1:nrow(maize.coded $geno),200)
-ind2 <- sample(1:ncol(maize.coded $geno),200)
-original <- maize.coded$geno[cbind(ind1,ind2)]
+ind1 <- sample(1:nrow(maize.coded$geno), 200)
+ind2 <- sample(1:ncol(maize.coded$geno), 200)
+original <- maize.coded$geno[cbind(ind1, ind2)]
 
-maize.coded$geno[cbind(ind1,ind2)] <- NA
+maize.coded$geno[cbind(ind1, ind2)] <- NA
 # imputing of missing values by family structure
-maize.imputed <- codeGeno( maize.coded,impute=TRUE,impute.type="family",label.heter=NULL)
+maize.imputed <- codeGeno(maize.coded, impute = TRUE, impute.type = "family", label.heter = NULL)
 
 
 # compare in a cross table
-imputed <- maize.imputed$geno[cbind(ind1,ind2)]
-(t1 <- table(original,imputed) )
+imputed <- maize.imputed$geno[cbind(ind1, ind2)]
+(t1 <- table(original, imputed))
 # sum of correct replacements
-sum(diag(t1))/sum(t1)
+sum(diag(t1)) / sum(t1)
 
 # compare with random imputation
-maize.random <- codeGeno(maize.coded,impute=TRUE,impute.type="random",label.heter=NULL)
-imputed2 <- maize.random$geno[cbind(ind1,ind2)]
-(t2 <- table(original,imputed2) )
+maize.random <- codeGeno(maize.coded, impute = TRUE, impute.type = "random", label.heter = NULL)
+imputed2 <- maize.random$geno[cbind(ind1, ind2)]
+(t2 <- table(original, imputed2))
 # sum of correct replacements
-sum(diag(t2))/sum(t2)
+sum(diag(t2)) / sum(t2)
 }
 
 }

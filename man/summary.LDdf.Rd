@@ -27,15 +27,15 @@ average and maximum distance of number of markers
 }
 \examples{
 
-  \dontrun{
-  library(synbreed)
-  data(maize)
-  maizeC <- codeGeno(maize)
-  maizeLD <- pairwiseLD(maizeC,chr=1:10,type="data.frame")
-  maizeLDm <- pairwiseLD(maizeC,chr=1:10,type="matrix")
-  summary(maizeLD)
-  summary(maizeLDm)
-  }
+\dontrun{
+library(synbreed)
+data(maize)
+maizeC <- codeGeno(maize)
+maizeLD <- pairwiseLD(maizeC, chr = 1:10, type = "data.frame")
+maizeLDm <- pairwiseLD(maizeC, chr = 1:10, type = "matrix")
+summary(maizeLD)
+summary(maizeLDm)
+}
 
 }
 \seealso{

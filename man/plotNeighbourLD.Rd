@@ -57,9 +57,9 @@ but here the LD between adjacent markers is plotted along the chromosomes.
 \dontrun{
 library(synbreedData)
 data(maize)
-maize2 <-codeGeno(maize)
-LD <- pairwiseLD(maize2,chr=1:10,type="matrix")
-plotNeighbourLD(LD,maize2,nMarker=FALSE)
+maize2 <- codeGeno(maize)
+LD <- pairwiseLD(maize2, chr = 1:10, type = "matrix")
+plotNeighbourLD(LD, maize2, nMarker = FALSE)
 }
 
 }

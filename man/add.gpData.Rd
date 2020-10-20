@@ -26,7 +26,9 @@ formats are not supported.
 }
 \examples{
 
-\dontrun{add.gpData(maize, maize)}
+\dontrun{
+add.gpData(maize, maize)
+}
 
 }
 \seealso{

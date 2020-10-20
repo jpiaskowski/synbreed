@@ -138,12 +138,16 @@ Z'\bf Z + \bf G^{-1}\frac{\sigma^2_e}{\sigma^2_u} \end{array} \right) \left(
 library(synbreedData)
 data(maize)
 maize2 <- codeGeno(maize)
-U <- kin(maize2,ret="realized")
+U <- kin(maize2, ret = "realized")
 # cross validation
-cv.maize  <- crossVal(maize2,cov.matrix=list(U),k=5,Rep=1,
-            Seed=123,sampling="random",varComp=c(26.5282,48.5785),VC.est="commit")
-cv.maize2 <- crossVal(maize2,k=5,Rep=1,
-             Seed=123,sampling="random",varComp=c(0.0704447,48.5785),VC.est="commit")
+cv.maize <- crossVal(maize2,
+  cov.matrix = list(U), k = 5, Rep = 1,
+  Seed = 123, sampling = "random", varComp = c(26.5282, 48.5785), VC.est = "commit"
+)
+cv.maize2 <- crossVal(maize2,
+  k = 5, Rep = 1,
+  Seed = 123, sampling = "random", varComp = c(0.0704447, 48.5785), VC.est = "commit"
+)
 # comparing results, both are equal!
 cv.maize$PredAbi
 cv.maize2$PredAbi

@@ -48,8 +48,8 @@ summary(maize.cross)
 plot(maize.cross)
 
 # use function scanone
-maize.cross <- calc.genoprob(maize.cross, step=2.5)
-result <- scanone(maize.cross, pheno.col=1, method="em")
+maize.cross <- calc.genoprob(maize.cross, step = 2.5)
+result <- scanone(maize.cross, pheno.col = 1, method = "em")
 # display of LOD curve along the chromosome
 plot(result)
 

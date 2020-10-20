@@ -60,24 +60,24 @@ data(maize)
 
 # realized kinship matrix
 maizeC <- codeGeno(maize)
-U <- kin(maizeC,ret="realized")/2
+U <- kin(maizeC, ret = "realized") / 2
 
 # solution with gpMod
-m <- gpMod(maizeC,kin=U,model="BLUP")
+m <- gpMod(maizeC, kin = U, model = "BLUP")
 
 # solution with MME
-diag(U) <- diag(U) + 0.000001  # to avoid singularities
+diag(U) <- diag(U) + 0.000001 # to avoid singularities
 # determine shrinkage parameter
-lambda <- m$fit$sigma[2]/ m$fit$sigma[1]
+lambda <- m$fit$sigma[2] / m$fit$sigma[1]
 # multiply G with shrinkage parameter
-GI <- solve(U)*lambda
-y <- maizeC$pheno[,1,]
+GI <- solve(U) * lambda
+y <- maizeC$pheno[, 1, ]
 n <- length(y)
-X <- matrix(1,ncol=1,nrow=n)
-mme <- MME(y=y,Z=diag(n),GI=GI,X=X,RI=diag(n))
+X <- matrix(1, ncol = 1, nrow = n)
+mme <- MME(y = y, Z = diag(n), GI = GI, X = X, RI = diag(n))
 
 # comparison
-head(m$fit$predicted[,1]-m$fit$beta)
+head(m$fit$predicted[, 1] - m$fit$beta)
 head(mme$u)
 }
 

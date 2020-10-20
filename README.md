@@ -11,8 +11,8 @@
 
 **To do:**
 
-* update 'synbreed-package.r'
-* convert vignettes to Rmarkdown format
+* finish update 'synbreed-package.r'
+* finish converting vignettes to Rmarkdown format
 * get updated version of Beagle added
 * write unit tests
 * make README file consistent with ropensci guidelines

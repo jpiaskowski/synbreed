@@ -1,0 +1,115 @@
+---
+title: "Introduction to the synbreed package"
+author: 
+- Valentin Wimmer\\Technische Universit\"at M\"unchen
+- Theresa Albrecht\\Technische Universit\"at M\"unchen
+- Chris-Carolin Sch\"on\\Technische Universit\"at M\"unchen
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to the synbreed package}
+  %\VignetteKeywords{genomic prediction}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+bibliography: IntroSyn.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE, 
+  fig.width = 8, fig.height = 6, out.width = "100%"
+)
+```
+
+```{r libs}
+library(synbreed)
+```
+
+## Introduction
+
+The analysis of quantitative traits is of paramount interest in agricultural genetics. For many traits such as yield, quality or resistance against diseases and environmental stress we observe continuously distributed phenotypes. According to quantitative genetic theory, these phenotypes are determined by the joint action of many genes, the so called quantitative trait loci (QTL), and the environment \citep{Falconer1996}. To understand the inheritance of quantitative traits and to predict the unobservable genetic value of an individual are major challenges of agricultural genetics. Recently, high-throughput genotyping technology delivering tens or hundreds of thousands of single nucleotide polymorphism markers (SNPs) has become available for many crop and livestock species. The genomes of a large number of individuals can now be analyzed for their specific marker profile at high density, which allows estimating the proportion of genotype-sharing between them as well as efficient tagging of QTL in segregation analyses. In breeding, selection of the best genotypes can be conducted on high-density marker profiles once sufficiently accurate genome-based prediction models have been established. To achieve this, genomic prediction models are developed based on large training populations for which genotypic and phenotypic data are available. Once the best model is established, it can be used to predict the unobservable genetic value of selection candidates based on their marker profile.
+
+Research on genomic prediction will be advanced through the availability of comprehensive, user-friendly software that covers a wide range of analysis steps. In a review, \citet{Heffner2009} state the urgent demand for such software to bring genomic prediction from theory to practice. To provide a framework for the analysis of genomic prediction data, we developed \pkg{synbreed} devised for the open-source software \proglang{R} \citep{R}.  
+
+Our objectives in the design of the package were (i) to provide user-friendly algorithms for non-trivial methods required in the analysis of genomic prediction data, (ii) create an analysis framework using a single, unified data object resembling a generic data structure which is suitable for a wide range of statistical methods employing genotypic and phenotypic data such as genomic prediction, genome-wide association studies (GWAS) or QTL mapping, (iii) provide the methods within one open-source software package to avoid data conversion and transfer between software packages, (iv) to keep the implementation flexible with respect to the data structure for plant and animal genetics, and (v) to provide a gateway to other software and \proglang{R} packages to broaden the type of possible applications.
+
+GP uses  statistical models combining whole-genome data with phenotypic data. SNP effects are estimated from a regression of the phenotype on the marker profile. However, with a dense marker map, the model is over-parametrized. Typically, the number of SNPs, $p$, exceeds the number of observations, $n$. A solution is the usage of mixed models \citep{Henderson1984}. Within this framework, SNPs are used as direct predictors by modeling SNP effects or, alternatively, they are used to estimate a marker-based relationship matrix between individuals \citep{Habier2007}. The latter is used to model the variance-covariance structure for the genetic values. Recently, different models using Bayesian regression models have become popular \citep{Meuwissen2001,Campos2009}. The predictive ability of a model for GP can be assessed using an out-of sample validation. If no independent test set is available, cross-validation (CV) is used to exploit the predictive ability of a model \citep{Legarra2008,Albrecht2011}.
+
+Several software programs for genetics research, covering parts of the required methods, have been released within the last years.  The programs  \proglang{ASReml} \citep{Gilmour2000} and \proglang{WOMBAT} \citep{Meyer2006} provide restricted maximum likelihood (REML) estimation procedures for linear mixed models with arbitrary variance-covariance structure. The program \proglang{PLINK} implements algorithms for genome-wide association studies (GWAS) and identical-by-descent estimation. However, these programs are not stand-alone. Within \proglang{R}, different packages that tangent issues for GP are available: \pkg{qtl} for QTL analysis in experimental crosses \citep{Broman2003}, \pkg{GenABEL} for GWAS and effective SNP data storage and manipulation \citep{Aulchenko2007}, \pkg{genetics} with classes and methods for handling genetic data \citep{Warnes2003} or \pkg{BLR} \citep{Perez2010} for genome-based prediction models with Bayesian Ridge and Bayesian Lasso regression. However, there is no comprehensive program covering the specific needs of genetic researchers to analyze GP data.
+
+
+In this article, we present how the \pkg{synbreed} package streamlines the analysis of GP data. The first part of the article summarizes the available data classes and functions. The second part shows by worked examples the application. The data management is guided by a single, unified data object. This forms the basis for all functions  including the coding of the marker genotypes, algorithms to impute missing genotypes and linkage disequilibrium analysis. Moreover, we provide functions to estimate coefficients of relatedness for individuals based on both pedigree or marker data. We provide several possibilities to visualize the objects generated by the \pkg{synbreed} package. We give by simulated and real data examples for the application of these functions. Mixed Models and Bayesian Regression models are used to predict genetic effects. The predictive ability of the models is compared by CV. Both, model fit and validation using CV, can be performed using the data object including genotypes and phenotypes directly. Finally, we give the computational requirements for the analysis steps and present possible extensions of the package.
+
+## Statistical models
+
+In this section, we present the statistical models used for the prediction of genetic values of individuals from a training set of individuals with phenotypes and pedigree or genotypes. We assume, that for each individual $i=1,...,n$ a single phenotypic record is available. Moreover, we consider a quantitative trait which can be modeled as being normal, i.e., $y_i = \mbox{N}(\mu + g_i,\sigma^2)$. By $\mu$, we denote the population mean and by $\sigma^2$ the residual variance.  The unobservable genetic value $g_i$ is predicted by statistical models using different data sources such as marker genotypes or pedigree.
+
+In the mixed model ``P-BLUP'', the genetic values are predicted using the pedigree information to construct a variance-covariance structure for the individuals. Following \citet{Henderson1984}, this model is defined by
+
+\begin{equation}\label{eq:animalMod}
+\bf{y} = \bf{X}\bm{\beta} + \bf Z \bf a + \bf e
+\end{equation}
+
+where $\bf y$ is the $n \times 1$ vector of phenotypic records, $\bm{\beta}$ is the vector of fixed effects and $\bf a$ is a  $n \times 1$ vector of random effects. Observations are allocated to the fixed and random effects by the  corresponding design matrices $\bf X$ and $\bf Z$. Fixed effects typically include the population mean and macro-environment  effects such as location or year. Genetic values are sampled from a multivariate normal distribution
+$$ \mathbf a \sim \mbox{N}( \mathbf 0, \mathbf A \sigma^2_a)$$
+where $\bf A$ is the additive numerator relationship matrix and $\sigma^2_a$ the additive genetic variance \citep{Falconer1996}. The off-diagonal values of $\bf A$ are given by $2f_{i_1i_2}$ for individuals $i_1$ and $i_2$ where -- for a given pedigree -- the \textit{coefficient of coancastry} $f_{i_1i_2}$ is computed by the expected probability that two alleles are identical by descent \citep{LynchWalsh1998}. The diagonal value for individual $i_1$ is $1+F_{i_1}$ with $F_{i_1}$ being the inbreeding coefficient.  The  $n \times 1$ vector  $\bf e$ denotes the residuals with $ \mathbf e \sim N( \mathbf 0, \mathbf{I}_n \sigma^2)$ and $\mathbf{ I}_n$ is the $n$-dimensional identity matrix. Best linear unbiased estimates (BLUE) for the fixed effects $\bm{\hat{\beta}}$ and predictions for the random effects (BLUP) $\bf{\hat{a}}$ are obtained by solving the mixed model equations (MME) \citep{Henderson1984}. 
+
+$$
+\left[ \begin{array}{cc}
+      \mathbf{X^\top X}&\mathbf{X^\top Z}\\
+      \mathbf{Z ^\top X}&\mathbf{Z ^\top Z+A^{-1}\frac{\sigma^2}{\sigma^2_a}}\end{array}\right]
+      \left[\begin{array}{c}
+      \bm{\hat\beta}\\
+      \mathbf{\hat a}\end{array}\right]  =
+\left[\begin{array}{c}
+      \mathbf{X^\top y}\\
+      \mathbf{Z^\top y}\end{array}\right]
+$$
+
+Estimates of the variance components $\hat \sigma^2_a$ and $\hat \sigma^2$ are obtained by REML estimation. A prediction for the genetic value of individual $i$ in the training set is given by $\hat a_i$.
+		
+Genotypic data is incorporated in the mixed model ``G-BLUP''. Here, the relationship matrix based on pedigree is replaced by the genomic relationship matrix based on marker data. With the genomic relationship matrix, random deviations  from the expected relationship caused by Mendelian sampling effects \citep{Goddard2009a} can be quantified. The following equation for the genomic relationship matrix in a random mating population was proposed by \citet{Habier2007}
+\begin{equation}\label{eq:vanRaden}
+\mathbf{U} = \frac{(\mathbf{W}-\mathbf{P})(\mathbf{W}-\mathbf{P})^\top}{2\sum_{j=1}^p p_j(1-p_j)}
+\end{equation}
+where $\bf{W}$ is the marker matrix assigning $p$ marker genotypes coded 0, 1 or 2 to $n$ individuals. $\bf{P}$ is a $n \times p$ matrix with two times the minor allele frequency $p_j$ for $j=1,...,p$ replicated  $n$ times within each column. The model ``G-BLUP'' is
+\begin{equation}\label{eq:gBlup}
+\bf{y} = \bf{X}\bm{\beta} + \bf Z \bf u + \bf e
+\end{equation}
+with
+$$ \mathbf u \sim \mbox{N}( \mathbf 0, \mathbf U \sigma^2_u)$$
+where $\sigma^2_u$ is the genetic variance pertaining to model ``G-BLUP''.  The remaining parameters are defined as in model ``P-BLUP''. A prediction for the genetic value for individuals in the training set is given by $\hat u_i$.
+
+In the random regression model ``RR-BLUP'', the phenotype is modeled as a function of the individual SNP effects
+\begin{equation}\label{eq:snpMod}
+\bf{y} = \bf{X}\bm{\beta} + \bf W \bf m + \bf e
+\end{equation}
+where $\bf{W}$ is the $n \times p$ marker matrix and $\bf m$ the $p$-dimensional vector of SNP effects. We assume that $\bf m \sim \mbox{N}( \mathbf 0, \mathbf I \sigma^2_m) $ where $\sigma^2_m$ denotes the proportion of the genetic variance contributed by each individual SNP. A prediction for the genetic value for individuals in the training set is given by $\bf{w}_i^\top\bf{\hat{m}}$, where $\bf{w}_i$ is the $p$-dimensional vector of marker genotypes of individual $i$ and $\bf{\hat{m}}$ the $p$-dimensional vector of estimated marker effects.  Predicted genetic values and variance components from model ``RR-BLUP'' are predictable from model ``G-BLUP'' \citep{Albrecht2011}. It is computationally advantageous to use model ``G-BLUP'' when $n<p$ because computation times are of order $O(n)$ and $O(p)$, respectively.
+
+The aforementioned models assume marker-homogeneous shrinkage of SNP effects. \citet{Meuwissen2001} suggested alternative models with marker-specific shrinkage. In this spirit, \citet{Campos2009} used Bayesian Lasso to predict SNP effects. Their model, denoted by  ``BL'', is given by
+\begin{equation}\label{eq:BayesianLasso}
+\bf{y} = \bf{X}\bm{\beta} + \bf W \bf m + \bf e
+\end{equation}
+All elements but $\bf m $ are defined as in ``RR-BLUP''. The SNP effects $\bf m $ are modeled by marker-specific prior distributions
+$$	\bf m \sim \mbox{N}(0,\bf T \sigma^2 ) $$
+with $\mathbf{T} = \mbox{diag}(\tau_1^2,...,\tau_j^2,...,\tau_p^2)$ and the following model hierarchy
+\begin{eqnarray*}	
+	\tau_j^2 &\sim& \mbox{Exp}(\lambda^2),\;j=1,...,p \\
+	\lambda^2 &\sim& \mbox{Ga}(\alpha,\beta) \\
+	e_i &\sim& \mbox{N}(0,\sigma^2),\;i=1,...,n  \\
+	\sigma^2 &\sim& \chi^{-2}(\nu,S^2)
+\end{eqnarray*}
+For details of the hyperparameters see \citet{Campos2009}. Parameter inference is performed within a Bayesian framework. The joint posterior distribution cannot be evaluated analytically in general. Hence Markov chain Monte Carlo (MCMC) methods are used to generate samples from the full-conditional posterior distributions. Since all full-conditional distributions are well-known distributions, a Gibbs-Sampler can be utilized to generate a Markov chain \citep{Park2008}. Prediction for the genetic value of individuals are obtained like in model ``RR-BLUP'' as $\bf{w}_i^\top\bf{\hat{m}}$.
+
+The implementation of GP requires the prediction of the genetic performance $\mathbf{g}^* = (g_1,...,g_{n^*})^\top$ of $n^*$ unphenotyped individuals. For model ``RR-BLUP'' and ``BL'', the predicted genetic performance is given by $\hat{\mathbf{g}}^* = \mathbf{X^*}\hat{\bm{\beta}} + \mathbf{W^*}^\top\hat{\mathbf{m}}$ where $\mathbf{X^*}$ denotes the design matrix for the fixed effects and $\mathbf{W}^*$ denotes the marker matrix for the unphenotyped individuals and $\hat{\mathbf{m}}$ the prediction of the SNP effects obtained from the training set. For ``P-BLUP'', the joint relationship matrix must be defined for all individuals in the training set and the prediction set. Predictions are obtained by solving the mixed model equation for the genetic values $\bf a^*$ of the unphenotyped individuals using the estimates of the variance-components of the training set
+\begin{equation}\label{eq:pred}
+\bf{y} =  \mathbf{X}{\bm{\beta}} + (\bf Z,\bf Q_0) \left(\begin{array}{l}{\bf a} \\ {\bf a^*} \end{array} \right)+ \bf e \quad \mbox{and} \quad \left(\begin{array}{l}{\bf a} \\ {\bf a^*} \end{array} \right) \sim \mbox{N}\left( \left[\begin{array}{l}0 \\ 0 \end{array}\right],\left[\begin{array}{ll} \mathbf{A} & \mathbf{A}^*   \\ {\mathbf{A}^*}^\top & \mathbf{A}^{**} \end{array}\right] \sigma^2_a \right)
+\end{equation}
+with  $\bf Q_0$ being a $n \times n^*$ matrix with zeros and $\mathbf{A}$ the $n \times n$ additive numerator relationship matrix for the individuals in the training set, $\mathbf{A}^{**}$ the $n^* \times n^*$ additive numerator relationship matrix for the unphenotyped individuals and $\mathbf{A}^*$ the $n \times n^*$  additive numerator relationship matrix of the individuals in the training set with the unphenotyped individuals. Predictions for the genetic performance are obtained by $\hat{\mathbf{g}}^* = \mathbf{X}\hat{\bm{\beta}} + \bf a^*$. The same prediction scheme is employed for ``G-BLUP''. Here, the genomic relationship matrix substitutes the additive numerator relationship matrix in Equation~\ref{eq:pred} and $\sigma^2_a$ is replaced by $\sigma^2_u$.
+
+The out-of sample performance of a GP model determines the predictive ability. Cross-validation is an assumption-free method to investigate the predictive ability of different models \citep{Legarra2008}. The data set is divided into $k$ mutually exclusive subsets, $k-1$ of them form the estimation set (ES) for model training. The $k$th subset is used as independent test set (TS) for prediction. The predictive ability of a model is the correlation $r(\mathbf{\hat{g}}_{TS},\mathbf{y}_{TS})$ of  the vector of predicted genetic values $\mathbf{\hat{g}}_{TS}$  and the vector of observed phenotypes $\mathbf{y}_{TS}$ of the individuals in the TS. Typically individuals are assigned randomly to TS and ES. However, different sampling strategies can be employed to account for population stratification. \citet{Albrecht2011} used within and across family-sampling for biparental families. The prediction bias can be assessed from a regression of the observed phenotype on the predicted genetic value \citep{Luan2009}. A regression coefficient of 1 indicates an unbiased prediction, a coefficient smaller than 1 implies inflation, a coefficient greater than 1 deflation of predicted genetic values compared to the observed phenotypes.
+
+
+
+

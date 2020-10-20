@@ -12,7 +12,7 @@
 **To do:**
 
 * update 'synbreed-package.r'
-* move vignettes to Rmarkdown format
+* convert vignettes to Rmarkdown format
 * get updated version of Beagle added
 * write unit tests
 * make README file consistent with ropensci guidelines

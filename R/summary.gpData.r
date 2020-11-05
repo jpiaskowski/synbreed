@@ -52,9 +52,7 @@ summary.gpData <- function(object, ...) {
   }
 
   # summary of 'geno'
-  if (is.null(obj$geno)) {
-    ans$geno <- NULL
-  } else {
+  if (!is.null(obj$geno)) {
     geno <- obj$geno
     nobs <- ncol(geno) * nrow(geno)
     # table is very time consuming
@@ -77,6 +75,8 @@ summary.gpData <- function(object, ...) {
       mapped <- !(is.na(obj$map$chr) | is.na(obj$map$pos))
       ans$geno$mappedMarkers <- sum(mapped)
     }
+  } else {
+    ans$geno <- NULL
   }
 
   # summary of 'pedigree'

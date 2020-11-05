@@ -1,3 +1,22 @@
+NO NEW VERSION NUMBER ASSIGNED YET
+================================
+
+* attempt commit to r-forge 2020 - 11 - 05 (failed)
+
+* documentation updated to work with roxygen2
+
+* code reformatted with styler
+
+* 'synbreedData' migrated to this package
+
+
+0.12-11
+================================
+
+* Uploaded on r-forge 2018 - 04 - 12
+
+* bug fix in codeGeno
+
 0.12-8
 ================================
 

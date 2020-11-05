@@ -154,7 +154,7 @@ gp <- create.gpData(pheno, geno, map, ped)
 summary(gp)
 
 
-# 9 plants with 2 traits , 3 replcations
+# 9 plants with 2 traits , 3 replications
 n <- 9 #
 pheno <- data.frame(
   ID = rep(letters[1:n], 3), rep = rep(1:3, each = n),

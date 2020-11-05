@@ -13,14 +13,14 @@
 #' genotypic and phenotypic data. Moreover, it is very convenient to store and
 #' share objects of class gpData. Any object of class gpData can be converted to
 #' class \code{cross} in the R package 'qtl' (Broman et al., 2003) and vice versa or to a
-#' \code{data.frame).
+#' \code{data.frame}.
 #'
-#' Main Functionality: (fraft form)
+#' Main Functionality: (draft form)
 #'
 #' - Data Preparation
 #' - Visualisation
-#' - `create.gpData`
-#' - `gp.Mod`
+#' - \code{create.gpData}
+#' - \code{gp.Mod}
 #' - Genetic Modelling
 #' - and more
 #'
@@ -40,7 +40,7 @@ NULL
 #'
 #' @name [.GenMap
 #' @docType data
-#' @param x object of class ''GenMap''
+#' @param x object of class 'GenMap'
 #' @param ...  indices
 #' @examples
 #'
@@ -58,7 +58,7 @@ NULL
 #'
 #' @name [.relationshipMatrix
 #' @docType data
-#' @param x object of class ''relationshipMatrix''
+#' @param x object of class 'relationshipMatrix'
 #' @param ...  indices
 #' @examples
 #'

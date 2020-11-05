@@ -189,6 +189,7 @@ pairwiseLD <- function(gpData, chr = NULL, type = c("data.frame", "matrix"), use
       mn <- colnames(markeri)
       posi <- pos[linkageGroup == lg[i]]
       ld.r <- multiCor(markeri, method = "spearman", use = "pairwise.complete.obs", cores = cores)
+      ld.r2 <- ld.r**2
       if (type == "data.frame") {
         ld.ri <- ld.r[lower.tri(ld.r)]
         # index vectors for LD data.frame

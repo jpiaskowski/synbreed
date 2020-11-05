@@ -268,6 +268,7 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
   # read information from arguments
   ##### rownames(res)[apply(is.na(res), 1, mean)>.5]
   # ============================================================
+
   impute.type <- match.arg(impute.type)
   infoCall <- match.call()
   SEED <- round(runif(2, 1, 1000000), 0)
@@ -416,7 +417,7 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
     if (impute.type == "fix" & is.null(replace.value)) stop("'replace.value' must be given for impute.type='fix'")
     # imputing with family information
     if ((impute.type == "family" | impute.type == "beagleAfterFamily" | impute.type == "beagleAfterFamilyNoRand") & is.null(popStruc)) stop(paste("family information needed, but
-    '", substitute(gpData), "$covar$family' is empty", sep = ""))
+        '", substitute(gpData), "$covar$family' is empty", sep = ""))
     if ((impute.type == "family" | impute.type == "beagleAfterFamily" | impute.type == "beagleAfterFamilyNoRand") & !is.null(popStruc)) {
       if (any(is.na(popStruc))) warning("missing values in family information, imputation is likely to be incomplete")
       if (length(popStruc) != n) stop("population structure must have equal length as obsersvations in genotypic data")
@@ -494,13 +495,15 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
       } else {
         alleles <- multiLapply(as.data.frame(gpData$geno), levels, mc.cores = cores)
       }
+      alleleNum <- multiLapply(alleles, length, mc.cores = cores)
       names(alleles) <- cnames
       gpData$geno <- multiLapply(as.data.frame(gpData$geno), as.numeric, mc.cores = cores)
       df.allele <- data.frame(id = rownames(gpData$map), refer = NA, heter = NA, alter = NA, stringsAsFactors = FALSE)
       if (is.null(label.heter)) {
         df.allele$refer <- unlist(multiLapply(alleles, extract, 1, mc.cores = cores))
         df.allele$alter <- unlist(multiLapply(alleles, extract, 2, mc.cores = cores))
-        df.allele$heter <- unlist(multiLapply(alleles, extract, 2, mc.cores = cores))
+        df.allele$heter <- unlist(multiLapply(alleles, extract, 3, mc.cores = cores))
+        df.allele[unlist(alleleNum) == 2 & !is.na(unlist(alleleNum)), c("alter", "heter")] <- df.allele[unlist(alleleNum) == 2 & !is.na(unlist(alleleNum)), c("heter", "alter")]
       } else {
         whereHetPos <- function(x, y = NULL) {
           if (is.function(y)) {
@@ -677,7 +680,8 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
       if (verbose) cat("   step 6a : No markers discarded due to fraction of missing values \n")
     }
   } else if (noHet) {
-    gpData$geno[gpData$geno == 1] <- NA
+    heterSel <- !is.na(gpData$alleles$heter)
+    gpData$geno[, heterSel][gpData$geno[, heterSel] == 1] <- NA
     if (!is.null(nmiss)) {
       which.miss <- multiLapply(as.data.frame(is.na(gpData$geno)), mean, na.rm = TRUE, mc.cores = cores) <= nmiss | knames
       gpData$geno <- gpData$geno[, which.miss]
@@ -876,6 +880,8 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
     }
     if (!is.null(tester) & impute.type %in% c("random", "beagle", "beagleAfterFamily")) gpData$geno <- gpData$geno / 2
 
+
+
     # ============================================================
     # step 8 - recoding
     # ============================================================
@@ -917,7 +923,6 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
   # ============================================================
   # step 10 - discard duplicated markers   (optional, argument keep.identical=FALSE)
   # ============================================================
-
   if (!keep.identical) {
     set.seed(SEED[2])
     colnames(gpData$geno) <- cnames
@@ -943,7 +948,7 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
       } else {
         df.ld <- data.frame(kept = as.character(), removed = as.character())
       }
-    } else { # end of imputed step
+    } else { # end of impute step
       if (!all(!is.na(gpData$geno))) {
         if (sum(which.duplicated) > 0) {
           gpData$geno[is.na(gpData$geno)] <- 3
@@ -971,7 +976,10 @@ codeGeno <- function(gpData, impute = FALSE, impute.type = c("random", "family",
         if (is.null(keep.list)) {
           for (i in which.miss) {
             if (which.duplicated[i]) next
-            for (j in ((i + 1):ncol(gpData$geno))[!which.duplicated[(i + 1):ncol(gpData$geno)]]) {
+            J <- which.miss
+            J <- J[J > i]
+            for (j in J) {
+              if (which.duplicated[j]) next
               if (all(gpData$geno[, i] == gpData$geno[, j], na.rm = TRUE)) {
                 if (sum(is.na(gpData$geno[, i])) >= sum(is.na(gpData$geno[, j]))) {
                   which.duplicated[i] <- TRUE
